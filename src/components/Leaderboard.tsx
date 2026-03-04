@@ -17,20 +17,24 @@ export default function Leaderboard({ allTime, today, compact = false }: Leaderb
   return (
     <div className="w-full">
       {/* Tabs */}
-      <div className="flex rounded-xl bg-bg-secondary p-1 mb-3">
+      <div className="flex rounded-lg border-2 border-border-arcade overflow-hidden mb-3">
         <button
           onClick={() => setTab("allTime")}
-          className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-colors ${
-            tab === "allTime" ? "bg-white text-text-primary shadow-sm" : "text-text-secondary"
+          className={`flex-1 py-2 px-3 font-[family-name:var(--font-press-start)] text-[9px] uppercase tracking-wider transition-colors ${
+            tab === "allTime"
+              ? "bg-bg-panel text-green-glow"
+              : "bg-bg-secondary text-text-dim"
           }`}
           style={{ touchAction: "manipulation" }}
         >
-          Kaikkien aikojen
+          All time
         </button>
         <button
           onClick={() => setTab("today")}
-          className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-colors ${
-            tab === "today" ? "bg-white text-text-primary shadow-sm" : "text-text-secondary"
+          className={`flex-1 py-2 px-3 font-[family-name:var(--font-press-start)] text-[9px] uppercase tracking-wider transition-colors border-l-2 border-border-arcade ${
+            tab === "today"
+              ? "bg-bg-panel text-green-glow"
+              : "bg-bg-secondary text-text-dim"
           }`}
           style={{ touchAction: "manipulation" }}
         >
@@ -40,7 +44,7 @@ export default function Leaderboard({ allTime, today, compact = false }: Leaderb
 
       {/* Table */}
       {displayEntries.length === 0 ? (
-        <p className="text-center text-text-secondary text-sm py-4">
+        <p className="text-center text-text-dim text-sm py-6">
           Ei tuloksia vielä
         </p>
       ) : (
@@ -48,18 +52,24 @@ export default function Leaderboard({ allTime, today, compact = false }: Leaderb
           {displayEntries.map((entry, i) => (
             <div
               key={`${entry.player_name}-${entry.created_at}-${i}`}
-              className="flex items-center gap-3 py-2 px-3 rounded-lg bg-white"
+              className={`flex items-center gap-3 py-2 px-3 rounded border border-border-arcade/50 ${
+                i === 0 ? "bg-bg-panel border-green-glow/30" : "bg-bg-secondary"
+              }`}
             >
-              <span className="w-6 text-center font-bold text-text-secondary text-sm">
-                {i + 1}.
+              <span className={`font-[family-name:var(--font-press-start)] text-[10px] w-6 text-center ${
+                i === 0 ? "text-accent-glow" : "text-text-dim"
+              }`}>
+                {i + 1}
               </span>
-              <span className="flex-1 font-medium text-text-primary truncate text-sm">
+              <span className="flex-1 font-semibold text-text-primary truncate text-sm uppercase tracking-wide">
                 {entry.player_name}
               </span>
-              <span className="text-sm text-text-secondary">
+              <span className="text-xs text-text-dim">
                 {entry.correct_answers}/{entry.total_questions}
               </span>
-              <span className="font-bold text-green-primary tabular-nums text-sm">
+              <span className={`font-[family-name:var(--font-press-start)] text-[10px] tabular-nums ${
+                i === 0 ? "text-green-glow glow-green" : "text-green-primary"
+              }`}>
                 {entry.score.toLocaleString("fi-FI")}
               </span>
             </div>

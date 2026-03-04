@@ -27,13 +27,11 @@ function PlayGame() {
 
   const { timeRemaining, start: startTimer, stop: stopTimer, totalTime } = useTimer(handleTimeUp);
 
-  // Start the game on mount
   useEffect(() => {
     startGame(count);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Manage timer and feedback transitions
   useEffect(() => {
     if (state.phase === "playing" && currentQuestion) {
       startTimer();
@@ -50,7 +48,6 @@ function PlayGame() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.phase, state.currentQuestionIndex]);
 
-  // Redirect to results
   useEffect(() => {
     if (state.phase === "results") {
       stopBgMusic();
@@ -86,7 +83,6 @@ function PlayGame() {
     play("bgMusic");
   }, [beginPlay, play, initSounds]);
 
-  // Tick sound in last 5 seconds
   useEffect(() => {
     if (state.phase === "playing" && timeRemaining <= 5 && timeRemaining > 0) {
       const whole = Math.ceil(timeRemaining);
@@ -102,8 +98,10 @@ function PlayGame() {
       <SoundToggle isMuted={isMuted} onToggle={toggleMute} />
 
       {/* Header */}
-      <div className="text-center mb-2">
-        <h1 className="text-xl font-bold text-green-primary">🌿 VegeVisa</h1>
+      <div className="text-center mb-3">
+        <h1 className="font-[family-name:var(--font-press-start)] text-sm text-green-glow glow-green">
+          VEGEVISA
+        </h1>
       </div>
 
       {state.phase === "countdown" && <Countdown onComplete={handleCountdownComplete} />}
@@ -129,12 +127,12 @@ function PlayGame() {
           {state.phase === "feedback" && (
             <div className="text-center mb-3">
               {state.isCorrect ? (
-                <span className="text-correct font-bold text-lg animate-float-up inline-block">
-                  Oikein! +{state.pointsEarned}
+                <span className="font-[family-name:var(--font-press-start)] text-xs text-correct glow-green animate-float-up inline-block">
+                  OIKEIN! +{state.pointsEarned}
                 </span>
               ) : (
-                <span className="text-wrong font-bold text-lg">
-                  {state.selectedAnswer === -1 ? "Aika loppui!" : "Väärin!"}
+                <span className="font-[family-name:var(--font-press-start)] text-xs text-wrong">
+                  {state.selectedAnswer === -1 ? "AIKA LOPPUI!" : "VÄÄRIN!"}
                 </span>
               )}
             </div>
@@ -166,7 +164,9 @@ export default function PlayPage() {
     <Suspense
       fallback={
         <div className="flex-1 flex items-center justify-center">
-          <div className="text-green-primary text-xl">Ladataan...</div>
+          <div className="font-[family-name:var(--font-press-start)] text-xs text-green-glow glow-green animate-blink">
+            LADATAAN...
+          </div>
         </div>
       }
     >

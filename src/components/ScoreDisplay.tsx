@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 interface ScoreDisplayProps {
   score: number;
-  duration?: number; // ms for roll-up animation
+  duration?: number;
 }
 
 export default function ScoreDisplay({ score, duration = 1500 }: ScoreDisplayProps) {
@@ -19,13 +19,11 @@ export default function ScoreDisplay({ score, duration = 1500 }: ScoreDisplayPro
     const steps = 30;
     const increment = score / steps;
     const stepDuration = duration / steps;
-    let current = 0;
     let step = 0;
 
     const interval = setInterval(() => {
       step++;
-      current = Math.min(Math.round(increment * step), score);
-      setDisplayed(current);
+      setDisplayed(Math.min(Math.round(increment * step), score));
       if (step >= steps) clearInterval(interval);
     }, stepDuration);
 
@@ -34,10 +32,12 @@ export default function ScoreDisplay({ score, duration = 1500 }: ScoreDisplayPro
 
   return (
     <div className="text-center">
-      <div className="text-6xl font-bold text-green-primary tabular-nums">
+      <div className="font-[family-name:var(--font-press-start)] text-4xl sm:text-5xl text-green-glow glow-green tabular-nums">
         {displayed.toLocaleString("fi-FI")}
       </div>
-      <p className="text-text-secondary mt-1">pistettä</p>
+      <p className="font-[family-name:var(--font-press-start)] text-[10px] text-text-dim mt-3 uppercase">
+        Pistettä
+      </p>
     </div>
   );
 }

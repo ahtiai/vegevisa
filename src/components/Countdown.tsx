@@ -22,11 +22,13 @@ export default function Countdown({ onComplete }: CountdownProps) {
     <div className="flex flex-col items-center justify-center min-h-[60vh]">
       <div
         key={count}
-        className="text-8xl font-bold text-green-primary animate-pulse"
+        className="font-[family-name:var(--font-press-start)] text-7xl text-green-glow glow-green animate-pulse"
       >
         {count > 0 ? count : ""}
       </div>
-      <p className="mt-4 text-text-secondary text-lg">Valmistaudu...</p>
+      <p className="mt-6 font-[family-name:var(--font-press-start)] text-[10px] text-text-dim uppercase tracking-widest">
+        Valmistaudu...
+      </p>
     </div>
   );
 }

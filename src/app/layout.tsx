@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
-import { Nunito, Quicksand } from "next/font/google";
+import { Open_Sans, Press_Start_2P } from "next/font/google";
 import "./globals.css";
 
-const nunito = Nunito({
-  variable: "--font-nunito",
+const openSans = Open_Sans({
+  variable: "--font-open-sans",
   subsets: ["latin"],
   display: "swap",
+  weight: ["400", "600", "700"],
 });
 
-const quicksand = Quicksand({
-  variable: "--font-quicksand",
+const pressStart = Press_Start_2P({
+  variable: "--font-press-start",
   subsets: ["latin"],
   display: "swap",
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -31,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fi">
-      <body className={`${nunito.variable} ${quicksand.variable} font-sans antialiased`}>
+      <body className={`${openSans.variable} ${pressStart.variable} font-sans antialiased pixel-grid`}>
         <div className="min-h-dvh flex flex-col">
           {children}
         </div>
