@@ -1,0 +1,222 @@
+[
+  {
+    "id": "q1",
+    "question": "Minä vuonna Pro Vege on perustettu?",
+    "option_a": "2023",
+    "option_b": "2025",
+    "option_c": "2021",
+    "option_d": "2019",
+    "correct": "a",
+    "difficulty": "easy",
+    "category": "provege"
+  },
+  {
+    "id": "q2",
+    "question": "Kuinka monta jäsentä Pro Vegellä on tällä hetkellä?",
+    "option_a": "79",
+    "option_b": "42",
+    "option_c": "23",
+    "option_d": "15",
+    "correct": "b",
+    "difficulty": "easy",
+    "category": "provege"
+  },
+  {
+    "id": "q3",
+    "question": "Mistä maakunnasta Pro Vegellä on eniten jäseniä Uudenmaan jälkeen?",
+    "option_a": "Varsinais-Suomi",
+    "option_b": "Etelä-Pohjanmaa",
+    "option_c": "Kymenlaakso",
+    "option_d": "Pohjois-Savo",
+    "correct": "b",
+    "difficulty": "medium",
+    "category": "provege"
+  },
+  {
+    "id": "q4",
+    "question": "Kuinka paljon suomalainen aikuinen syö palkokasveja keskimäärin päivässä, kun ravitsemussuositusten mukainen määrä on 50-100g?",
+    "option_a": "3g",
+    "option_b": "13g",
+    "option_c": "32g",
+    "option_d": "55g",
+    "correct": "a",
+    "difficulty": "medium",
+    "category": "health"
+  },
+  {
+    "id": "q5",
+    "question": "Ruuan osuus ympäristövaikutuksiin on merkittävä. Suomessa ruuan osuus luontoa kuormittavista tekijöistä on jopa...",
+    "option_a": "15%",
+    "option_b": "23%",
+    "option_c": "36%",
+    "option_d": "42%",
+    "correct": "d",
+    "difficulty": "hard",
+    "category": "environment"
+  },
+  {
+    "id": "q6",
+    "question": "Vuoden 2025 Ilmastobarometrin mukaan, kuinka moni suomalaisista toivoo, että kasvisruoka olisi edullisempaa kuin korkeapäästöisempi ruoka?",
+    "option_a": "34%",
+    "option_b": "52%",
+    "option_c": "69%",
+    "option_d": "88%",
+    "correct": "c",
+    "difficulty": "medium",
+    "category": "environment"
+  },
+  {
+    "id": "q7",
+    "question": "Jos tanskalaiset söisivät ravitsemussuositusten mukaisesti, se säästäisi tutkimuksen mukaan terveydenhoitokuluja vuodessa...",
+    "option_a": "0,7mrd€",
+    "option_b": "1,4mrd€",
+    "option_c": "1,9mrd€",
+    "option_d": "2,7mrd€",
+    "correct": "d",
+    "difficulty": "hard",
+    "category": "health"
+  },
+  {
+    "id": "q8",
+    "question": "Kasvipohjaisten proteiinien toimiala on tehokas kohde päästövähennyksiin tähtääville investoinneille. Kuinka monta kertaa tehokkaampi kuin sementti?",
+    "option_a": "1,5",
+    "option_b": "3",
+    "option_c": "6",
+    "option_d": "9",
+    "correct": "b",
+    "difficulty": "hard",
+    "category": "environment"
+  },
+  {
+    "id": "q9",
+    "question": "Mikä seuraavista kasveista sisältää eniten proteiinia per 100g?",
+    "option_a": "Riisi",
+    "option_b": "Soijapapu",
+    "option_c": "Peruna",
+    "option_d": "Banaani",
+    "correct": "b",
+    "difficulty": "easy",
+    "category": "health"
+  },
+  {
+    "id": "q10",
+    "question": "Kuinka paljon kasvihuonekaasupäästöjä voitaisiin vähentää, jos kaikki suomalaiset siirtyisivät kasvispainotteiseen ruokavalioon?",
+    "option_a": "5%",
+    "option_b": "15%",
+    "option_c": "30%",
+    "option_d": "50%",
+    "correct": "c",
+    "difficulty": "medium",
+    "category": "environment"
+  },
+  {
+    "id": "q11",
+    "question": "Mikä seuraavista EI ole palkokasvi?",
+    "option_a": "Linssi",
+    "option_b": "Kikherne",
+    "option_c": "Kvinoa",
+    "option_d": "Härkäpapu",
+    "correct": "c",
+    "difficulty": "easy",
+    "category": "health"
+  },
+  {
+    "id": "q12",
+    "question": "Kuinka monta litraa vettä tarvitaan yhden kilogramman naudanlihan tuottamiseen?",
+    "option_a": "1 500 litraa",
+    "option_b": "5 000 litraa",
+    "option_c": "10 000 litraa",
+    "option_d": "15 000 litraa",
+    "correct": "d",
+    "difficulty": "medium",
+    "category": "environment"
+  },
+  {
+    "id": "q13",
+    "question": "Mikä on Suomen suosituin kasviproteiinin lähde?",
+    "option_a": "Tofu",
+    "option_b": "Härkis (härkäpapu)",
+    "option_c": "Nyhtökaura",
+    "option_d": "Seitan",
+    "correct": "c",
+    "difficulty": "easy",
+    "category": "health"
+  },
+  {
+    "id": "q14",
+    "question": "Kuinka suuri osa maailman viljelysmaasta käytetään eläinten rehun tuotantoon?",
+    "option_a": "15%",
+    "option_b": "33%",
+    "option_c": "50%",
+    "option_d": "77%",
+    "correct": "d",
+    "difficulty": "hard",
+    "category": "environment"
+  },
+  {
+    "id": "q15",
+    "question": "Mikä seuraavista vitamiineista on erityisen tärkeä vegaaniruokavaliossa täydentää?",
+    "option_a": "C-vitamiini",
+    "option_b": "B12-vitamiini",
+    "option_c": "A-vitamiini",
+    "option_d": "K-vitamiini",
+    "correct": "b",
+    "difficulty": "easy",
+    "category": "health"
+  },
+  {
+    "id": "q16",
+    "question": "Kuinka monta prosenttia maailman kasvihuonekaasupäästöistä tulee karjataloudesta?",
+    "option_a": "4%",
+    "option_b": "8%",
+    "option_c": "14,5%",
+    "option_d": "25%",
+    "correct": "c",
+    "difficulty": "medium",
+    "category": "environment"
+  },
+  {
+    "id": "q17",
+    "question": "Mikä maa on maailman suurin soijantuottaja?",
+    "option_a": "Kiina",
+    "option_b": "Brasilia",
+    "option_c": "Yhdysvallat",
+    "option_d": "Intia",
+    "correct": "b",
+    "difficulty": "medium",
+    "category": "environment"
+  },
+  {
+    "id": "q18",
+    "question": "Suomessa toimii useita kasvisruokaan erikoistuneita yrityksiä. Mikä seuraavista on suomalainen yritys?",
+    "option_a": "Beyond Meat",
+    "option_b": "Oatly",
+    "option_c": "Gold&Green (Nyhtökaura)",
+    "option_d": "Impossible Foods",
+    "correct": "c",
+    "difficulty": "easy",
+    "category": "provege"
+  },
+  {
+    "id": "q19",
+    "question": "Kuinka monta prosenttia suomalaisista ilmoittaa syövänsä kasvisruokaa vähintään kerran viikossa?",
+    "option_a": "20%",
+    "option_b": "35%",
+    "option_c": "50%",
+    "option_d": "65%",
+    "correct": "c",
+    "difficulty": "medium",
+    "category": "health"
+  },
+  {
+    "id": "q20",
+    "question": "Härkäpapu on suosittu suomalainen kasviproteiini. Missä päin Suomea sitä viljellään eniten?",
+    "option_a": "Lappi",
+    "option_b": "Etelä-Suomi",
+    "option_c": "Keski-Suomi",
+    "option_d": "Pohjois-Pohjanmaa",
+    "correct": "b",
+    "difficulty": "easy",
+    "category": "health"
+  }
+]
