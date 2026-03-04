@@ -196,6 +196,6 @@
   <rect x="60" y="445" width="4" height="2" fill="#a09030" opacity="0.3"/>
   <rect x="210" y="450" width="4" height="2" fill="#9c8828" opacity="0.3"/>
 
-  <!-- Warm sun overlay — very subtle golden tint -->
-  <rect width="320" height="480" fill="#ffcc00" opacity="0.03"/>
+  <!-- Darken overlay for contrast with UI -->
+  <rect width="320" height="480" fill="#000000" opacity="0.45"/>
 </svg>

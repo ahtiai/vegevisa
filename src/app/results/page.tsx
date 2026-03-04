@@ -57,14 +57,14 @@ function ResultsContent() {
       <ScoreDisplay score={score} />
 
       {/* Stats */}
-      <p className="font-[family-name:var(--font-press-start)] text-xs text-text-secondary mt-5">
+      <p className="font-[family-name:var(--font-press-start)] text-xs text-white/70 mt-5">
         {correct}/{total} OIKEIN
       </p>
 
       {/* Rank */}
       <div className="mt-8 text-center arcade-panel rounded-lg px-8 py-6 w-full">
         <span className="text-4xl">{rank.emoji}</span>
-        <p className="font-[family-name:var(--font-press-start)] text-sm text-accent glow-accent mt-3 leading-loose">
+        <p className="font-[family-name:var(--font-press-start)] text-sm text-white mt-3 leading-loose">
           {rank.title.toUpperCase()}
         </p>
       </div>

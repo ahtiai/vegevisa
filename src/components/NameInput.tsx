@@ -14,7 +14,7 @@ export default function NameInput({ onSubmit, loading, submitted }: NameInputPro
   if (submitted) {
     return (
       <div className="arcade-panel rounded-lg p-4 text-center">
-        <p className="font-[family-name:var(--font-press-start)] text-xs text-correct glow-green uppercase">
+        <p className="font-[family-name:var(--font-press-start)] text-xs text-white uppercase">
           Tulos tallennettu!
         </p>
       </div>

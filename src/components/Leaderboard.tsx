@@ -59,18 +59,18 @@ export default function Leaderboard({ allTime, today, compact = false }: Leaderb
               }`}
             >
               <span className={`font-[family-name:var(--font-press-start)] text-xs w-7 text-center ${
-                i === 0 ? "text-accent-glow" : i === 1 ? "text-text-secondary" : "text-text-dim"
+                i === 0 ? "text-white" : "text-white/50"
               }`}>
                 {i + 1}
               </span>
-              <span className="flex-1 font-bold text-text-primary truncate text-base uppercase tracking-wide">
+              <span className="flex-1 font-bold text-white truncate text-base uppercase tracking-wide">
                 {entry.player_name}
               </span>
-              <span className="text-sm text-text-dim font-bold">
+              <span className="text-sm text-white/50 font-bold">
                 {entry.correct_answers}/{entry.total_questions}
               </span>
               <span className={`font-[family-name:var(--font-press-start)] text-xs tabular-nums ${
-                i === 0 ? "text-green-glow glow-green" : "text-green-primary"
+                i === 0 ? "text-white" : "text-white/80"
               }`}>
                 {entry.score.toLocaleString("fi-FI")}
               </span>

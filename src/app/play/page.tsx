@@ -123,23 +123,22 @@ function PlayGame() {
             <QuestionCard question={currentQuestion.question} />
           </div>
 
-          {/* Points feedback */}
-          {state.phase === "feedback" && (
-            <div className="text-center mb-4">
-              {state.isCorrect ? (
-                <span className="font-[family-name:var(--font-press-start)] text-sm text-correct glow-green animate-float-up inline-block">
-                  OIKEIN! +{state.pointsEarned}
-                </span>
-              ) : (
-                <span className="font-[family-name:var(--font-press-start)] text-sm text-wrong">
-                  {state.selectedAnswer === -1 ? "AIKA LOPPUI!" : "VÄÄRIN!"}
-                </span>
-              )}
-            </div>
-          )}
-
           {/* Answer buttons */}
           <div className="space-y-3 mt-auto pb-5">
+            {/* Points feedback — above first answer */}
+            {state.phase === "feedback" && (
+              <div className="text-center py-3">
+                {state.isCorrect ? (
+                  <span className="font-[family-name:var(--font-press-start)] text-base text-white bg-correct/20 border-2 border-correct rounded-lg px-5 py-2 inline-block glow-green animate-float-up">
+                    OIKEIN! +{state.pointsEarned}
+                  </span>
+                ) : (
+                  <span className="font-[family-name:var(--font-press-start)] text-base text-white bg-wrong/20 border-2 border-wrong rounded-lg px-5 py-2 inline-block">
+                    {state.selectedAnswer === -1 ? "AIKA LOPPUI!" : "VÄÄRIN!"}
+                  </span>
+                )}
+              </div>
+            )}
             {currentQuestion.options.map((option, i) => (
               <AnswerButton
                 key={`${state.currentQuestionIndex}-${i}`}
