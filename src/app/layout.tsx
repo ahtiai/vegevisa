@@ -19,10 +19,21 @@ const pressStart = Press_Start_2P({
 export const metadata: Metadata = {
   title: "VegeVisa — Kasvistietovisailu",
   description: "Testaa kasvistietosi! Pro Vegen kasvistietovisailu.",
+  metadataBase: new URL("https://vegevisa.vercel.app"),
+  icons: {
+    icon: "/favicon.svg",
+  },
   openGraph: {
     title: "VegeVisa — Kasvistietovisailu",
     description: "Testaa kasvistietosi! Pro Vegen kasvistietovisailu.",
-    images: ["/images/og-image.png"],
+    siteName: "VegeVisa",
+    locale: "fi_FI",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "VegeVisa — Kasvistietovisailu",
+    description: "Testaa kasvistietosi! Pro Vegen kasvistietovisailu.",
   },
 };
 
