@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useCallback, useRef, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import { useEffect, useCallback, useRef, useState, Suspense } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useGameState } from "@/hooks/useGameState";
 import { useTimer } from "@/hooks/useTimer";
 import { useSound } from "@/hooks/useSound";
@@ -9,23 +9,24 @@ import Countdown from "@/components/Countdown";
 import QuestionCard from "@/components/QuestionCard";
 import AnswerButton from "@/components/AnswerButton";
 import TimerBar from "@/components/TimerBar";
-import SoundToggle from "@/components/SoundToggle";
 
 function PlayGame() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const count = (parseInt(searchParams.get("count") || "10") === 5 ? 5 : 10) as 5 | 10;
 
   const { state, currentQuestion, startGame, beginPlay, answerQuestion, timeUp, nextQuestion } =
     useGameState();
-  const { play, isMuted, toggleMute, initSounds, stopBgMusic } = useSound();
+  const { play, initSounds, stopBgMusic } = useSound();
   const feedbackTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [showQuitModal, setShowQuitModal] = useState(false);
 
   const handleTimeUp = useCallback(() => {
     timeUp();
     play("wrong");
   }, [timeUp, play]);
 
-  const { timeRemaining, start: startTimer, stop: stopTimer, totalTime } = useTimer(handleTimeUp);
+  const { timeRemaining, start: startTimer, stop: stopTimer, pause: pauseTimer, resume: resumeTimer, totalTime } = useTimer(handleTimeUp);
 
   useEffect(() => {
     startGame(count);
@@ -83,6 +84,28 @@ function PlayGame() {
     play("bgMusic");
   }, [beginPlay, play, initSounds]);
 
+  const handleQuitPress = () => {
+    pauseTimer();
+    if (feedbackTimerRef.current) clearTimeout(feedbackTimerRef.current);
+    setShowQuitModal(true);
+  };
+
+  const handleQuitCancel = () => {
+    setShowQuitModal(false);
+    if (state.phase === "playing") {
+      resumeTimer();
+    } else if (state.phase === "feedback") {
+      feedbackTimerRef.current = setTimeout(() => {
+        nextQuestion();
+      }, 800);
+    }
+  };
+
+  const handleQuitConfirm = () => {
+    stopBgMusic();
+    router.push("/");
+  };
+
   useEffect(() => {
     if (state.phase === "playing" && timeRemaining <= 5 && timeRemaining > 0) {
       const whole = Math.ceil(timeRemaining);
@@ -95,13 +118,20 @@ function PlayGame() {
 
   return (
     <main className="flex-1 flex flex-col px-5 py-5 max-w-lg mx-auto w-full">
-      <SoundToggle isMuted={isMuted} onToggle={toggleMute} />
-
-      {/* Header */}
-      <div className="text-center mb-4">
+      {/* Top bar */}
+      <div className="flex items-center justify-between mb-4">
+        <div className="w-8" />
         <h1 className="font-[family-name:var(--font-press-start)] text-base text-green-glow glow-green">
           VEGEVISA
         </h1>
+        <button
+          onClick={handleQuitPress}
+          className="w-8 h-8 flex items-center justify-center rounded-md border-2 border-border-bright bg-bg-panel text-text-dim hover:text-white/70 hover:border-wrong/60 transition-colors text-xs"
+          title="Lopeta peli"
+          style={{ touchAction: "manipulation" }}
+        >
+          &#10005;
+        </button>
       </div>
 
       {state.phase === "countdown" && <Countdown onComplete={handleCountdownComplete} />}
@@ -151,6 +181,37 @@ function PlayGame() {
                 showResult={state.phase === "feedback"}
               />
             ))}
+          </div>
+        </div>
+      )}
+
+      {/* Quit confirmation modal */}
+      {showQuitModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-6 bg-black/70 backdrop-blur-sm">
+          <div className="arcade-panel rounded-xl p-8 max-w-sm w-full text-center">
+            <p className="text-3xl mb-4">🥕</p>
+            <p className="font-[family-name:var(--font-press-start)] text-xs text-white leading-loose mb-2">
+              HETKINEN!
+            </p>
+            <p className="text-white/80 text-base mb-8">
+              Oletko varma, että haluat lopettaa? Kasvikset odottavat sinua!
+            </p>
+            <div className="space-y-3">
+              <button
+                onClick={handleQuitCancel}
+                className="arcade-btn w-full h-14 rounded-lg font-[family-name:var(--font-press-start)] text-xs text-green-glow uppercase tracking-wider"
+                style={{ touchAction: "manipulation" }}
+              >
+                Jatka peliä
+              </button>
+              <button
+                onClick={handleQuitConfirm}
+                className="w-full h-12 rounded-lg border-2 border-border-arcade bg-transparent font-[family-name:var(--font-press-start)] text-[10px] text-text-dim hover:text-wrong/80 hover:border-wrong/40 transition-colors uppercase tracking-wider"
+                style={{ touchAction: "manipulation" }}
+              >
+                Lopeta peli
+              </button>
+            </div>
           </div>
         </div>
       )}
