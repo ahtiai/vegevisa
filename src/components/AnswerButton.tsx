@@ -30,7 +30,7 @@ export default function AnswerButton({
 }: AnswerButtonProps) {
   let borderColor = "var(--border-bright)";
   let leftColor = ACCENT_COLORS[index];
-  let bgStyle = "var(--bg-panel)";
+  let bgStyle = "rgba(14, 30, 14, 0.94)";
   let glowStyle = "none";
 
   if (showResult) {

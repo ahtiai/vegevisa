@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  /* Dark forest palette */
-  --bg-primary: #0a1a0a;
-  --bg-secondary: #112211;
-  --bg-panel: #152a15;
-  --border-arcade: #2d5a2d;
-  --border-bright: #3d7a3d;
+  /* Dark panels over bright field */
+  --bg-primary: #1a2e1a;
+  --bg-secondary: #162816;
+  --bg-panel: #0e1e0eee;
+  --border-arcade: #3d7a3d;
+  --border-bright: #4a9a4a;
 
   /* Greens */
   --green-glow: #39ff14;
@@ -15,14 +15,14 @@
   --green-bright: #7CFC00;
 
   /* Accents */
-  --accent: #E8B86D;
+  --accent: #f0c860;
   --accent-glow: #ffe600;
-  --brown-warm: #8B7355;
+  --brown-warm: #a08848;
 
   /* Text */
-  --text-primary: #f0f0e8;
-  --text-secondary: #a0b8a0;
-  --text-dim: #5a7a5a;
+  --text-primary: #f0f0e0;
+  --text-secondary: #b0c8a0;
+  --text-dim: #6a8a5a;
 
   /* Feedback */
   --correct: #39ff14;
@@ -71,10 +71,10 @@ body::after {
 }
 
 body {
-  background: var(--bg-primary);
+  background: #806820;
   background-image: url('/images/pixel-bg.svg');
-  background-size: 320px 320px;
-  background-repeat: repeat;
+  background-size: cover;
+  background-position: top center;
   background-attachment: fixed;
   color: var(--text-primary);
   font-family: var(--font-sans);
@@ -91,19 +91,21 @@ html, body {
 /* ===== Arcade UI Primitives ===== */
 
 .arcade-panel {
-  background: var(--bg-panel);
+  background: rgba(14, 30, 14, 0.94);
   border: 3px solid var(--border-arcade);
   box-shadow:
     0 0 15px rgba(57, 255, 20, 0.06),
     inset 0 0 30px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
 }
 
 .arcade-btn {
   border: 3px solid var(--border-bright);
-  background: var(--bg-panel);
+  background: rgba(14, 30, 14, 0.94);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   transition: all 120ms ease;
+  backdrop-filter: blur(4px);
 }
 
 .arcade-btn:hover {

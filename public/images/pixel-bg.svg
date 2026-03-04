@@ -1,145 +1,201 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="0 0 320 320">
-  <!-- Dark summer field pixel art background tile -->
-  <rect width="320" height="320" fill="#0a1a0a"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="480" viewBox="0 0 320 480">
+  <!-- Sunny summer day pixel art wheat field -->
 
-  <!-- Sky gradient layer - dark twilight -->
-  <rect width="320" height="120" fill="#0d1f12"/>
-  <rect width="320" height="60" fill="#0f2216"/>
+  <!-- Sky — warm blue gradient bands -->
+  <rect width="320" height="480" fill="#4a90c4"/>
+  <rect width="320" height="60" fill="#5a9fd4"/>
+  <rect y="60" width="320" height="50" fill="#5298cc"/>
+  <rect y="110" width="320" height="50" fill="#4a90c4"/>
+  <rect y="160" width="320" height="40" fill="#4888bc"/>
 
-  <!-- Stars -->
-  <rect x="40" y="20" width="2" height="2" fill="#3a5a3a" opacity="0.5"/>
-  <rect x="120" y="35" width="2" height="2" fill="#4a6a4a" opacity="0.4"/>
-  <rect x="200" y="15" width="2" height="2" fill="#3a5a3a" opacity="0.6"/>
-  <rect x="280" y="40" width="2" height="2" fill="#4a6a4a" opacity="0.3"/>
-  <rect x="70" y="50" width="2" height="2" fill="#3a5a3a" opacity="0.4"/>
-  <rect x="250" y="25" width="2" height="2" fill="#4a6a4a" opacity="0.5"/>
-  <rect x="160" y="8" width="2" height="2" fill="#3a5a3a" opacity="0.3"/>
+  <!-- Wispy clouds — pixel style -->
+  <rect x="30" y="30" width="8" height="4" fill="#d4e8f4" opacity="0.6"/>
+  <rect x="38" y="26" width="12" height="8" fill="#d4e8f4" opacity="0.5"/>
+  <rect x="50" y="28" width="8" height="6" fill="#d4e8f4" opacity="0.4"/>
+  <rect x="22" y="28" width="8" height="6" fill="#d4e8f4" opacity="0.4"/>
 
-  <!-- Distant treeline silhouette -->
-  <rect x="0" y="70" width="8" height="16" fill="#0b1e0e"/>
-  <rect x="8" y="66" width="8" height="20" fill="#0c200f"/>
-  <rect x="16" y="62" width="8" height="24" fill="#0b1e0e"/>
-  <rect x="24" y="68" width="8" height="18" fill="#0d2210"/>
-  <rect x="32" y="64" width="8" height="22" fill="#0b1e0e"/>
-  <rect x="40" y="58" width="8" height="28" fill="#0c200f"/>
-  <rect x="48" y="62" width="8" height="24" fill="#0d2210"/>
-  <rect x="56" y="66" width="8" height="20" fill="#0b1e0e"/>
-  <rect x="64" y="60" width="8" height="26" fill="#0c200f"/>
-  <rect x="72" y="56" width="8" height="30" fill="#0b1e0e"/>
-  <rect x="80" y="62" width="8" height="24" fill="#0d2210"/>
-  <rect x="88" y="66" width="8" height="20" fill="#0c200f"/>
-  <rect x="96" y="60" width="8" height="26" fill="#0b1e0e"/>
-  <rect x="104" y="64" width="8" height="22" fill="#0d2210"/>
-  <rect x="112" y="58" width="8" height="28" fill="#0c200f"/>
-  <rect x="120" y="62" width="8" height="24" fill="#0b1e0e"/>
-  <rect x="128" y="68" width="8" height="18" fill="#0d2210"/>
-  <rect x="136" y="64" width="8" height="22" fill="#0c200f"/>
-  <rect x="144" y="56" width="8" height="30" fill="#0b1e0e"/>
-  <rect x="152" y="60" width="8" height="26" fill="#0d2210"/>
-  <rect x="160" y="66" width="8" height="20" fill="#0c200f"/>
-  <rect x="168" y="62" width="8" height="24" fill="#0b1e0e"/>
-  <rect x="176" y="58" width="8" height="28" fill="#0d2210"/>
-  <rect x="184" y="64" width="8" height="22" fill="#0c200f"/>
-  <rect x="192" y="60" width="8" height="26" fill="#0b1e0e"/>
-  <rect x="200" y="66" width="8" height="20" fill="#0d2210"/>
-  <rect x="208" y="62" width="8" height="24" fill="#0c200f"/>
-  <rect x="216" y="56" width="8" height="30" fill="#0b1e0e"/>
-  <rect x="224" y="62" width="8" height="24" fill="#0d2210"/>
-  <rect x="232" y="68" width="8" height="18" fill="#0c200f"/>
-  <rect x="240" y="64" width="8" height="22" fill="#0b1e0e"/>
-  <rect x="248" y="58" width="8" height="28" fill="#0d2210"/>
-  <rect x="256" y="62" width="8" height="24" fill="#0c200f"/>
-  <rect x="264" y="66" width="8" height="20" fill="#0b1e0e"/>
-  <rect x="272" y="60" width="8" height="26" fill="#0d2210"/>
-  <rect x="280" y="64" width="8" height="22" fill="#0c200f"/>
-  <rect x="288" y="68" width="8" height="18" fill="#0b1e0e"/>
-  <rect x="296" y="62" width="8" height="24" fill="#0d2210"/>
-  <rect x="304" y="58" width="8" height="28" fill="#0c200f"/>
-  <rect x="312" y="66" width="8" height="20" fill="#0b1e0e"/>
+  <rect x="180" y="50" width="12" height="4" fill="#d4e8f4" opacity="0.5"/>
+  <rect x="192" y="46" width="16" height="8" fill="#d4e8f4" opacity="0.4"/>
+  <rect x="208" y="48" width="10" height="6" fill="#d4e8f4" opacity="0.35"/>
+  <rect x="172" y="48" width="8" height="6" fill="#d4e8f4" opacity="0.35"/>
 
-  <!-- Ground / field base -->
-  <rect x="0" y="86" width="320" height="234" fill="#0e1f0e"/>
+  <rect x="260" y="70" width="8" height="4" fill="#d4e8f4" opacity="0.4"/>
+  <rect x="268" y="66" width="12" height="8" fill="#d4e8f4" opacity="0.35"/>
+  <rect x="280" y="68" width="8" height="6" fill="#d4e8f4" opacity="0.3"/>
 
-  <!-- Field rows - pixel crop rows -->
-  <!-- Row 1 -->
-  <rect x="0" y="100" width="320" height="2" fill="#142a14" opacity="0.6"/>
-  <rect x="10" y="96" width="4" height="6" fill="#1a3a18"/>
-  <rect x="30" y="94" width="4" height="8" fill="#1d3d1b"/>
-  <rect x="55" y="96" width="4" height="6" fill="#1a3a18"/>
-  <rect x="80" y="95" width="4" height="7" fill="#1d3d1b"/>
-  <rect x="110" y="96" width="4" height="6" fill="#1a3a18"/>
-  <rect x="140" y="94" width="4" height="8" fill="#1d3d1b"/>
-  <rect x="165" y="96" width="4" height="6" fill="#1a3a18"/>
-  <rect x="195" y="95" width="4" height="7" fill="#1d3d1b"/>
-  <rect x="220" y="94" width="4" height="8" fill="#1a3a18"/>
-  <rect x="250" y="96" width="4" height="6" fill="#1d3d1b"/>
-  <rect x="275" y="95" width="4" height="7" fill="#1a3a18"/>
-  <rect x="305" y="94" width="4" height="8" fill="#1d3d1b"/>
+  <rect x="90" y="80" width="10" height="4" fill="#d4e8f4" opacity="0.35"/>
+  <rect x="100" y="76" width="14" height="8" fill="#d4e8f4" opacity="0.3"/>
+  <rect x="114" y="78" width="8" height="6" fill="#d4e8f4" opacity="0.25"/>
 
-  <!-- Row 2 -->
-  <rect x="0" y="130" width="320" height="2" fill="#142a14" opacity="0.5"/>
-  <rect x="20" y="126" width="4" height="6" fill="#1a3a18"/>
-  <rect x="45" y="124" width="4" height="8" fill="#1d3d1b"/>
-  <rect x="70" y="126" width="4" height="6" fill="#1a3a18"/>
-  <rect x="100" y="125" width="4" height="7" fill="#1d3d1b"/>
-  <rect x="125" y="124" width="4" height="8" fill="#1a3a18"/>
-  <rect x="155" y="126" width="4" height="6" fill="#1d3d1b"/>
-  <rect x="180" y="125" width="4" height="7" fill="#1a3a18"/>
-  <rect x="210" y="124" width="4" height="8" fill="#1d3d1b"/>
-  <rect x="235" y="126" width="4" height="6" fill="#1a3a18"/>
-  <rect x="265" y="125" width="4" height="7" fill="#1d3d1b"/>
-  <rect x="290" y="124" width="4" height="8" fill="#1a3a18"/>
+  <!-- Sun glow (top right) -->
+  <rect x="260" y="15" width="16" height="16" fill="#fff8d0" opacity="0.7"/>
+  <rect x="256" y="19" width="24" height="8" fill="#fff0a0" opacity="0.3"/>
+  <rect x="264" y="11" width="8" height="24" fill="#fff0a0" opacity="0.3"/>
 
-  <!-- Row 3 -->
-  <rect x="0" y="165" width="320" height="2" fill="#142a14" opacity="0.4"/>
-  <rect x="15" y="160" width="6" height="8" fill="#1a3a18"/>
-  <rect x="50" y="158" width="6" height="10" fill="#1d3d1b"/>
-  <rect x="85" y="160" width="6" height="8" fill="#1a3a18"/>
-  <rect x="120" y="159" width="6" height="9" fill="#1d3d1b"/>
-  <rect x="155" y="158" width="6" height="10" fill="#1a3a18"/>
-  <rect x="190" y="160" width="6" height="8" fill="#1d3d1b"/>
-  <rect x="225" y="159" width="6" height="9" fill="#1a3a18"/>
-  <rect x="260" y="158" width="6" height="10" fill="#1d3d1b"/>
-  <rect x="295" y="160" width="6" height="8" fill="#1a3a18"/>
+  <!-- Horizon haze — warm atmosphere -->
+  <rect y="190" width="320" height="10" fill="#8ab060" opacity="0.3"/>
 
-  <!-- Row 4 - closer, bigger plants -->
-  <rect x="0" y="200" width="320" height="2" fill="#142a14" opacity="0.3"/>
-  <rect x="5" y="194" width="6" height="10" fill="#1a3a18"/>
-  <rect x="35" y="192" width="6" height="12" fill="#1d3d1b"/>
-  <rect x="65" y="194" width="6" height="10" fill="#1a3a18"/>
-  <rect x="95" y="193" width="6" height="11" fill="#1d3d1b"/>
-  <rect x="130" y="192" width="6" height="12" fill="#1a3a18"/>
-  <rect x="160" y="194" width="6" height="10" fill="#1d3d1b"/>
-  <rect x="195" y="193" width="6" height="11" fill="#1a3a18"/>
-  <rect x="230" y="192" width="6" height="12" fill="#1d3d1b"/>
-  <rect x="265" y="194" width="6" height="10" fill="#1a3a18"/>
-  <rect x="300" y="192" width="6" height="12" fill="#1d3d1b"/>
+  <!-- Distant hills / treeline -->
+  <rect y="195" width="320" height="5" fill="#6a9848"/>
+  <rect x="0" y="188" width="10" height="12" fill="#5a8840"/>
+  <rect x="10" y="185" width="10" height="15" fill="#5e8c42"/>
+  <rect x="20" y="187" width="8" height="13" fill="#568438"/>
+  <rect x="28" y="183" width="10" height="17" fill="#5a8840"/>
+  <rect x="38" y="186" width="8" height="14" fill="#5e8c42"/>
+  <rect x="46" y="182" width="10" height="18" fill="#568438"/>
+  <rect x="56" y="185" width="8" height="15" fill="#5a8840"/>
+  <rect x="64" y="188" width="10" height="12" fill="#5e8c42"/>
+  <rect x="74" y="184" width="8" height="16" fill="#568438"/>
+  <rect x="82" y="180" width="10" height="20" fill="#5a8840"/>
+  <rect x="92" y="184" width="8" height="16" fill="#5e8c42"/>
+  <rect x="100" y="187" width="10" height="13" fill="#568438"/>
+  <rect x="110" y="183" width="8" height="17" fill="#5a8840"/>
+  <rect x="118" y="186" width="10" height="14" fill="#5e8c42"/>
+  <rect x="128" y="182" width="8" height="18" fill="#568438"/>
+  <rect x="136" y="185" width="10" height="15" fill="#5a8840"/>
+  <rect x="146" y="188" width="8" height="12" fill="#5e8c42"/>
+  <rect x="154" y="184" width="10" height="16" fill="#568438"/>
+  <rect x="164" y="181" width="8" height="19" fill="#5a8840"/>
+  <rect x="172" y="185" width="10" height="15" fill="#5e8c42"/>
+  <rect x="182" y="187" width="8" height="13" fill="#568438"/>
+  <rect x="190" y="183" width="10" height="17" fill="#5a8840"/>
+  <rect x="200" y="186" width="8" height="14" fill="#5e8c42"/>
+  <rect x="208" y="182" width="10" height="18" fill="#568438"/>
+  <rect x="218" y="185" width="8" height="15" fill="#5a8840"/>
+  <rect x="226" y="188" width="10" height="12" fill="#5e8c42"/>
+  <rect x="236" y="184" width="8" height="16" fill="#568438"/>
+  <rect x="244" y="181" width="10" height="19" fill="#5a8840"/>
+  <rect x="254" y="185" width="8" height="15" fill="#5e8c42"/>
+  <rect x="262" y="183" width="10" height="17" fill="#568438"/>
+  <rect x="272" y="186" width="8" height="14" fill="#5a8840"/>
+  <rect x="280" y="182" width="10" height="18" fill="#5e8c42"/>
+  <rect x="290" y="185" width="10" height="15" fill="#568438"/>
+  <rect x="300" y="188" width="10" height="12" fill="#5a8840"/>
+  <rect x="310" y="184" width="10" height="16" fill="#5e8c42"/>
 
-  <!-- Row 5 -->
-  <rect x="0" y="240" width="320" height="2" fill="#142a14" opacity="0.25"/>
-  <rect x="25" y="232" width="8" height="12" fill="#1a3a18"/>
-  <rect x="60" y="230" width="8" height="14" fill="#1d3d1b"/>
-  <rect x="105" y="232" width="8" height="12" fill="#1a3a18"/>
-  <rect x="145" y="231" width="8" height="13" fill="#1d3d1b"/>
-  <rect x="185" y="230" width="8" height="14" fill="#1a3a18"/>
-  <rect x="230" y="232" width="8" height="12" fill="#1d3d1b"/>
-  <rect x="270" y="231" width="8" height="13" fill="#1a3a18"/>
+  <!-- Field base — golden wheat color -->
+  <rect y="200" width="320" height="280" fill="#c4a840"/>
 
-  <!-- Row 6 - foreground -->
-  <rect x="0" y="280" width="320" height="2" fill="#142a14" opacity="0.2"/>
-  <rect x="10" y="270" width="8" height="14" fill="#162e14"/>
-  <rect x="50" y="268" width="8" height="16" fill="#183218"/>
-  <rect x="90" y="270" width="8" height="14" fill="#162e14"/>
-  <rect x="140" y="269" width="8" height="15" fill="#183218"/>
-  <rect x="180" y="268" width="8" height="16" fill="#162e14"/>
-  <rect x="220" y="270" width="8" height="14" fill="#183218"/>
-  <rect x="260" y="269" width="8" height="15" fill="#162e14"/>
-  <rect x="300" y="268" width="8" height="16" fill="#183218"/>
+  <!-- Field texture bands — perspective rows of wheat -->
+  <!-- Far rows (thin, dense) -->
+  <rect y="200" width="320" height="8" fill="#a89838"/>
+  <rect y="208" width="320" height="3" fill="#b8a438"/>
+  <rect y="215" width="320" height="8" fill="#bca840"/>
+  <rect y="223" width="320" height="3" fill="#d0b848"/>
 
-  <!-- Subtle earth texture -->
-  <rect x="0" y="300" width="320" height="20" fill="#0c1a0c"/>
-  <rect x="20" y="305" width="4" height="2" fill="#142414" opacity="0.3"/>
-  <rect x="80" y="308" width="4" height="2" fill="#142414" opacity="0.2"/>
-  <rect x="150" y="304" width="4" height="2" fill="#142414" opacity="0.3"/>
-  <rect x="240" y="310" width="4" height="2" fill="#142414" opacity="0.2"/>
+  <!-- Wheat stalks far -->
+  <rect x="5" y="203" width="2" height="8" fill="#d4bc50"/>
+  <rect x="15" y="201" width="2" height="10" fill="#ccb448"/>
+  <rect x="28" y="204" width="2" height="7" fill="#d4bc50"/>
+  <rect x="42" y="202" width="2" height="9" fill="#ccb448"/>
+  <rect x="58" y="203" width="2" height="8" fill="#d4bc50"/>
+  <rect x="72" y="201" width="2" height="10" fill="#ccb448"/>
+  <rect x="88" y="204" width="2" height="7" fill="#d4bc50"/>
+  <rect x="102" y="202" width="2" height="9" fill="#d4bc50"/>
+  <rect x="118" y="203" width="2" height="8" fill="#ccb448"/>
+  <rect x="135" y="201" width="2" height="10" fill="#d4bc50"/>
+  <rect x="150" y="204" width="2" height="7" fill="#ccb448"/>
+  <rect x="168" y="202" width="2" height="9" fill="#d4bc50"/>
+  <rect x="185" y="203" width="2" height="8" fill="#ccb448"/>
+  <rect x="200" y="201" width="2" height="10" fill="#d4bc50"/>
+  <rect x="218" y="204" width="2" height="7" fill="#ccb448"/>
+  <rect x="235" y="202" width="2" height="9" fill="#d4bc50"/>
+  <rect x="252" y="203" width="2" height="8" fill="#ccb448"/>
+  <rect x="270" y="201" width="2" height="10" fill="#d4bc50"/>
+  <rect x="288" y="204" width="2" height="7" fill="#ccb448"/>
+  <rect x="305" y="202" width="2" height="9" fill="#d4bc50"/>
+
+  <!-- Mid rows -->
+  <rect y="230" width="320" height="12" fill="#b89c38"/>
+  <rect y="242" width="320" height="4" fill="#c8ac44"/>
+  <rect y="250" width="320" height="12" fill="#c0a440"/>
+  <rect y="262" width="320" height="4" fill="#d0b448"/>
+
+  <!-- Wheat stalks mid -->
+  <rect x="8" y="230" width="3" height="14" fill="#d8c058"/>
+  <rect x="4" y="228" width="4" height="3" fill="#dccc60" rx="1"/>
+  <rect x="30" y="232" width="3" height="12" fill="#d0b850"/>
+  <rect x="26" y="230" width="4" height="3" fill="#d8c458" rx="1"/>
+  <rect x="55" y="229" width="3" height="15" fill="#d8c058"/>
+  <rect x="51" y="227" width="4" height="3" fill="#dccc60" rx="1"/>
+  <rect x="82" y="231" width="3" height="13" fill="#d0b850"/>
+  <rect x="78" y="229" width="4" height="3" fill="#d8c458" rx="1"/>
+  <rect x="110" y="230" width="3" height="14" fill="#d8c058"/>
+  <rect x="106" y="228" width="4" height="3" fill="#dccc60" rx="1"/>
+  <rect x="140" y="232" width="3" height="12" fill="#d0b850"/>
+  <rect x="136" y="230" width="4" height="3" fill="#d8c458" rx="1"/>
+  <rect x="170" y="229" width="3" height="15" fill="#d8c058"/>
+  <rect x="166" y="227" width="4" height="3" fill="#dccc60" rx="1"/>
+  <rect x="200" y="231" width="3" height="13" fill="#d0b850"/>
+  <rect x="196" y="229" width="4" height="3" fill="#d8c458" rx="1"/>
+  <rect x="230" y="230" width="3" height="14" fill="#d8c058"/>
+  <rect x="226" y="228" width="4" height="3" fill="#dccc60" rx="1"/>
+  <rect x="260" y="232" width="3" height="12" fill="#d0b850"/>
+  <rect x="256" y="230" width="4" height="3" fill="#d8c458" rx="1"/>
+  <rect x="290" y="229" width="3" height="15" fill="#d8c058"/>
+  <rect x="286" y="227" width="4" height="3" fill="#dccc60" rx="1"/>
+
+  <!-- Near rows (bigger, more detail) -->
+  <rect y="270" width="320" height="15" fill="#b09430"/>
+  <rect y="285" width="320" height="5" fill="#c0a43c"/>
+  <rect y="295" width="320" height="15" fill="#b89c38"/>
+  <rect y="310" width="320" height="5" fill="#c8ac44"/>
+
+  <!-- Wheat stalks near -->
+  <rect x="10" y="268" width="4" height="20" fill="#d8c058"/>
+  <rect x="5" y="264" width="6" height="5" fill="#e0cc68" rx="1"/>
+  <rect x="40" y="270" width="4" height="18" fill="#d0b850"/>
+  <rect x="35" y="266" width="6" height="5" fill="#d8c860" rx="1"/>
+  <rect x="75" y="267" width="4" height="21" fill="#d8c058"/>
+  <rect x="70" y="263" width="6" height="5" fill="#e0cc68" rx="1"/>
+  <rect x="110" y="269" width="4" height="19" fill="#d0b850"/>
+  <rect x="105" y="265" width="6" height="5" fill="#d8c860" rx="1"/>
+  <rect x="148" y="268" width="4" height="20" fill="#d8c058"/>
+  <rect x="143" y="264" width="6" height="5" fill="#e0cc68" rx="1"/>
+  <rect x="185" y="270" width="4" height="18" fill="#d0b850"/>
+  <rect x="180" y="266" width="6" height="5" fill="#d8c860" rx="1"/>
+  <rect x="220" y="267" width="4" height="21" fill="#d8c058"/>
+  <rect x="215" y="263" width="6" height="5" fill="#e0cc68" rx="1"/>
+  <rect x="258" y="269" width="4" height="19" fill="#d0b850"/>
+  <rect x="253" y="265" width="6" height="5" fill="#d8c860" rx="1"/>
+  <rect x="295" y="268" width="4" height="20" fill="#d8c058"/>
+  <rect x="290" y="264" width="6" height="5" fill="#e0cc68" rx="1"/>
+
+  <!-- Closest rows — big stalks -->
+  <rect y="320" width="320" height="20" fill="#a88c28"/>
+  <rect y="340" width="320" height="6" fill="#b89c34"/>
+  <rect y="350" width="320" height="20" fill="#a08424"/>
+  <rect y="370" width="320" height="6" fill="#b09030"/>
+
+  <!-- Big foreground wheat -->
+  <rect x="12" y="312" width="5" height="28" fill="#d4bc50"/>
+  <rect x="6" y="306" width="8" height="7" fill="#e0cc68" rx="1"/>
+  <rect x="50" y="315" width="5" height="25" fill="#ccb448"/>
+  <rect x="44" y="309" width="8" height="7" fill="#d8c460" rx="1"/>
+  <rect x="95" y="311" width="5" height="29" fill="#d4bc50"/>
+  <rect x="89" y="305" width="8" height="7" fill="#e0cc68" rx="1"/>
+  <rect x="140" y="314" width="5" height="26" fill="#ccb448"/>
+  <rect x="134" y="308" width="8" height="7" fill="#d8c460" rx="1"/>
+  <rect x="190" y="312" width="5" height="28" fill="#d4bc50"/>
+  <rect x="184" y="306" width="8" height="7" fill="#e0cc68" rx="1"/>
+  <rect x="240" y="315" width="5" height="25" fill="#ccb448"/>
+  <rect x="234" y="309" width="8" height="7" fill="#d8c460" rx="1"/>
+  <rect x="290" y="311" width="5" height="29" fill="#d4bc50"/>
+  <rect x="284" y="305" width="8" height="7" fill="#e0cc68" rx="1"/>
+
+  <!-- Bottom ground -->
+  <rect y="380" width="320" height="100" fill="#98802a"/>
+  <rect y="400" width="320" height="80" fill="#8c7424"/>
+  <rect y="430" width="320" height="50" fill="#806820"/>
+
+  <!-- Scattered earth details -->
+  <rect x="30" y="400" width="4" height="2" fill="#a09030" opacity="0.5"/>
+  <rect x="100" y="420" width="4" height="2" fill="#9c8828" opacity="0.4"/>
+  <rect x="180" y="410" width="4" height="2" fill="#a09030" opacity="0.5"/>
+  <rect x="250" y="435" width="4" height="2" fill="#9c8828" opacity="0.4"/>
+  <rect x="60" y="445" width="4" height="2" fill="#a09030" opacity="0.3"/>
+  <rect x="210" y="450" width="4" height="2" fill="#9c8828" opacity="0.3"/>
+
+  <!-- Warm sun overlay — very subtle golden tint -->
+  <rect width="320" height="480" fill="#ffcc00" opacity="0.03"/>
 </svg>
