@@ -31,11 +31,11 @@ export default function ScoreDisplay({ score, duration = 1500 }: ScoreDisplayPro
   }, [score, duration]);
 
   return (
-    <div className="text-center">
+    <div className="text-center arcade-panel rounded-xl px-10 py-8">
       <div className="font-[family-name:var(--font-press-start)] text-4xl sm:text-5xl text-green-glow glow-green tabular-nums">
         {displayed.toLocaleString("fi-FI")}
       </div>
-      <p className="font-[family-name:var(--font-press-start)] text-[10px] text-text-dim mt-3 uppercase">
+      <p className="font-[family-name:var(--font-press-start)] text-xs text-text-dim mt-4 uppercase tracking-widest">
         Pistettä
       </p>
     </div>

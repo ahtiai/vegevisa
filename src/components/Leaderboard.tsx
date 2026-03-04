@@ -17,13 +17,13 @@ export default function Leaderboard({ allTime, today, compact = false }: Leaderb
   return (
     <div className="w-full">
       {/* Tabs */}
-      <div className="flex rounded-lg border-2 border-border-arcade overflow-hidden mb-3">
+      <div className="flex rounded-lg border-3 border-border-bright overflow-hidden mb-4">
         <button
           onClick={() => setTab("allTime")}
-          className={`flex-1 py-2 px-3 font-[family-name:var(--font-press-start)] text-[9px] uppercase tracking-wider transition-colors ${
+          className={`flex-1 py-3 px-4 font-[family-name:var(--font-press-start)] text-[10px] uppercase tracking-wider transition-colors ${
             tab === "allTime"
-              ? "bg-bg-panel text-green-glow"
-              : "bg-bg-secondary text-text-dim"
+              ? "bg-bg-panel text-green-glow border-r-3 border-border-bright"
+              : "bg-bg-secondary text-text-dim border-r-3 border-border-bright"
           }`}
           style={{ touchAction: "manipulation" }}
         >
@@ -31,7 +31,7 @@ export default function Leaderboard({ allTime, today, compact = false }: Leaderb
         </button>
         <button
           onClick={() => setTab("today")}
-          className={`flex-1 py-2 px-3 font-[family-name:var(--font-press-start)] text-[9px] uppercase tracking-wider transition-colors border-l-2 border-border-arcade ${
+          className={`flex-1 py-3 px-4 font-[family-name:var(--font-press-start)] text-[10px] uppercase tracking-wider transition-colors ${
             tab === "today"
               ? "bg-bg-panel text-green-glow"
               : "bg-bg-secondary text-text-dim"
@@ -44,30 +44,32 @@ export default function Leaderboard({ allTime, today, compact = false }: Leaderb
 
       {/* Table */}
       {displayEntries.length === 0 ? (
-        <p className="text-center text-text-dim text-sm py-6">
-          Ei tuloksia vielä
-        </p>
+        <div className="arcade-panel rounded-lg p-6 text-center">
+          <p className="text-text-dim text-base font-bold">Ei tuloksia vielä</p>
+        </div>
       ) : (
-        <div className="space-y-1">
+        <div className="space-y-2">
           {displayEntries.map((entry, i) => (
             <div
               key={`${entry.player_name}-${entry.created_at}-${i}`}
-              className={`flex items-center gap-3 py-2 px-3 rounded border border-border-arcade/50 ${
-                i === 0 ? "bg-bg-panel border-green-glow/30" : "bg-bg-secondary"
+              className={`flex items-center gap-4 py-3 px-4 rounded-lg border-2 ${
+                i === 0
+                  ? "bg-bg-panel border-green-glow/40"
+                  : "bg-bg-secondary border-border-arcade"
               }`}
             >
-              <span className={`font-[family-name:var(--font-press-start)] text-[10px] w-6 text-center ${
-                i === 0 ? "text-accent-glow" : "text-text-dim"
+              <span className={`font-[family-name:var(--font-press-start)] text-xs w-7 text-center ${
+                i === 0 ? "text-accent-glow" : i === 1 ? "text-text-secondary" : "text-text-dim"
               }`}>
                 {i + 1}
               </span>
-              <span className="flex-1 font-semibold text-text-primary truncate text-sm uppercase tracking-wide">
+              <span className="flex-1 font-bold text-text-primary truncate text-base uppercase tracking-wide">
                 {entry.player_name}
               </span>
-              <span className="text-xs text-text-dim">
+              <span className="text-sm text-text-dim font-bold">
                 {entry.correct_answers}/{entry.total_questions}
               </span>
-              <span className={`font-[family-name:var(--font-press-start)] text-[10px] tabular-nums ${
+              <span className={`font-[family-name:var(--font-press-start)] text-xs tabular-nums ${
                 i === 0 ? "text-green-glow glow-green" : "text-green-primary"
               }`}>
                 {entry.score.toLocaleString("fi-FI")}

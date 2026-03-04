@@ -29,14 +29,14 @@ export default function ShareButtons({ score, correct, total }: ShareButtonsProp
     }
   };
 
-  const btnClass = "arcade-btn flex-1 min-w-[60px] py-3 px-2 rounded-lg text-[10px] font-[family-name:var(--font-press-start)] text-center uppercase tracking-wider";
+  const btnClass = "arcade-btn flex-1 min-w-[60px] py-4 px-3 rounded-lg font-[family-name:var(--font-press-start)] text-[10px] text-center uppercase tracking-wider";
 
   return (
     <div className="w-full">
-      <p className="font-[family-name:var(--font-press-start)] text-[10px] text-text-dim mb-3 text-center uppercase tracking-wider">
+      <p className="font-[family-name:var(--font-press-start)] text-[11px] text-text-secondary mb-4 text-center uppercase tracking-widest">
         Jaa kaverillesi
       </p>
-      <div className="flex gap-2">
+      <div className="flex gap-3">
         <a href={whatsappUrl} target="_blank" rel="noopener noreferrer"
           className={`${btnClass} text-[#25D366]`} style={{ touchAction: "manipulation" }}>
           WA

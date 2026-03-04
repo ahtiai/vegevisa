@@ -13,13 +13,13 @@ export default function LeaderboardPage() {
   }, [fetchLeaderboard]);
 
   return (
-    <main className="flex-1 flex flex-col items-center px-6 py-8 max-w-lg mx-auto w-full">
-      <h1 className="font-[family-name:var(--font-press-start)] text-sm text-green-glow glow-green mb-8">
+    <main className="flex-1 flex flex-col items-center px-6 py-10 max-w-lg mx-auto w-full">
+      <h1 className="font-[family-name:var(--font-press-start)] text-lg text-green-glow glow-green mb-10">
         HIGH SCORES
       </h1>
 
       {loading && (
-        <p className="font-[family-name:var(--font-press-start)] text-[10px] text-text-dim animate-blink">
+        <p className="font-[family-name:var(--font-press-start)] text-xs text-text-dim animate-blink">
           LADATAAN...
         </p>
       )}
@@ -32,7 +32,7 @@ export default function LeaderboardPage() {
 
       <Link
         href="/"
-        className="arcade-btn mt-8 px-8 h-12 rounded-lg font-[family-name:var(--font-press-start)] text-[10px] text-green-glow text-center leading-[3rem] uppercase tracking-wider inline-block"
+        className="arcade-btn mt-10 px-10 h-14 rounded-lg font-[family-name:var(--font-press-start)] text-xs text-green-glow text-center leading-[3.2rem] uppercase tracking-wider inline-block"
         style={{ touchAction: "manipulation" }}
       >
         Pelaa

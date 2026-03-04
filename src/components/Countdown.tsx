@@ -20,15 +20,17 @@ export default function Countdown({ onComplete }: CountdownProps) {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh]">
-      <div
-        key={count}
-        className="font-[family-name:var(--font-press-start)] text-7xl text-green-glow glow-green animate-pulse"
-      >
-        {count > 0 ? count : ""}
+      <div className="arcade-panel rounded-xl px-16 py-12">
+        <div
+          key={count}
+          className="font-[family-name:var(--font-press-start)] text-8xl text-green-glow glow-green animate-pulse text-center"
+        >
+          {count > 0 ? count : ""}
+        </div>
+        <p className="mt-8 font-[family-name:var(--font-press-start)] text-xs text-text-dim uppercase tracking-widest text-center">
+          Valmistaudu...
+        </p>
       </div>
-      <p className="mt-6 font-[family-name:var(--font-press-start)] text-[10px] text-text-dim uppercase tracking-widest">
-        Valmistaudu...
-      </p>
     </div>
   );
 }

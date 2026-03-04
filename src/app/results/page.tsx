@@ -47,9 +47,9 @@ function ResultsContent() {
   };
 
   return (
-    <main className="flex-1 flex flex-col items-center px-6 py-8 max-w-lg mx-auto w-full">
+    <main className="flex-1 flex flex-col items-center px-6 py-10 max-w-lg mx-auto w-full">
       {/* Header */}
-      <h1 className="font-[family-name:var(--font-press-start)] text-sm text-green-glow glow-green mb-8">
+      <h1 className="font-[family-name:var(--font-press-start)] text-lg text-green-glow glow-green mb-10">
         GAME OVER
       </h1>
 
@@ -57,49 +57,49 @@ function ResultsContent() {
       <ScoreDisplay score={score} />
 
       {/* Stats */}
-      <p className="font-[family-name:var(--font-press-start)] text-[10px] text-text-secondary mt-3">
+      <p className="font-[family-name:var(--font-press-start)] text-xs text-text-secondary mt-5">
         {correct}/{total} OIKEIN
       </p>
 
       {/* Rank */}
-      <div className="mt-6 text-center arcade-panel rounded-lg px-6 py-4">
-        <span className="text-3xl">{rank.emoji}</span>
-        <p className="font-[family-name:var(--font-press-start)] text-xs text-accent glow-accent mt-2 leading-relaxed">
+      <div className="mt-8 text-center arcade-panel rounded-lg px-8 py-6 w-full">
+        <span className="text-4xl">{rank.emoji}</span>
+        <p className="font-[family-name:var(--font-press-start)] text-sm text-accent glow-accent mt-3 leading-loose">
           {rank.title.toUpperCase()}
         </p>
       </div>
 
       {/* Name input */}
-      <div className="w-full mt-8">
+      <div className="w-full mt-10">
         <NameInput onSubmit={handleSubmitScore} loading={submitting} submitted={submitted} />
       </div>
 
       {/* Share */}
-      <div className="w-full mt-6">
+      <div className="w-full mt-8">
         <ShareButtons score={score} correct={correct} total={total} />
       </div>
 
       {/* Leaderboard peek */}
       {data && !loading && (
-        <div className="w-full mt-8">
+        <div className="w-full mt-10">
           <Leaderboard allTime={data.allTime} today={data.today} compact />
         </div>
       )}
 
       {/* Actions */}
-      <div className="w-full mt-8 space-y-3">
+      <div className="w-full mt-10 space-y-4">
         <Link
           href="/"
-          className="arcade-btn block w-full h-14 rounded-lg font-[family-name:var(--font-press-start)] text-xs text-green-glow text-center leading-[3.5rem] uppercase tracking-wider"
+          className="arcade-btn block w-full h-16 rounded-lg font-[family-name:var(--font-press-start)] text-sm text-green-glow text-center leading-[3.8rem] uppercase tracking-wider"
           style={{ touchAction: "manipulation" }}
         >
           Pelaa uudelleen
         </Link>
         <Link
           href="/leaderboard"
-          className="block w-full text-center font-[family-name:var(--font-press-start)] text-[9px] text-text-dim hover:text-green-glow transition-colors uppercase tracking-wider"
+          className="arcade-btn block w-full py-3 rounded-lg text-center font-[family-name:var(--font-press-start)] text-[10px] text-text-secondary hover:text-green-glow transition-colors uppercase tracking-wider"
         >
-          [ Tulostaulukko ]
+          [ HIGH SCORES ]
         </Link>
       </div>
     </main>
@@ -111,7 +111,7 @@ export default function ResultsPage() {
     <Suspense
       fallback={
         <div className="flex-1 flex items-center justify-center">
-          <div className="font-[family-name:var(--font-press-start)] text-xs text-green-glow glow-green animate-blink">
+          <div className="font-[family-name:var(--font-press-start)] text-sm text-green-glow glow-green animate-blink">
             LADATAAN...
           </div>
         </div>

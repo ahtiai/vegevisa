@@ -1,13 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  /* Pro Vege nature palette — warm, not neon */
-  --bg-primary: #0d1a0d;
-  --bg-secondary: #142814;
-  --bg-panel: #1a2e1a;
-  --border-arcade: #2a4a2a;
+  /* Dark forest palette */
+  --bg-primary: #0a1a0a;
+  --bg-secondary: #112211;
+  --bg-panel: #152a15;
+  --border-arcade: #2d5a2d;
+  --border-bright: #3d7a3d;
 
-  /* Greens — the "neon" but organic */
+  /* Greens */
   --green-glow: #39ff14;
   --green-primary: #5B8C5A;
   --green-light: #A8C7A0;
@@ -19,18 +20,13 @@
   --brown-warm: #8B7355;
 
   /* Text */
-  --text-primary: #ededed;
-  --text-secondary: #9aae9a;
+  --text-primary: #f0f0e8;
+  --text-secondary: #a0b8a0;
   --text-dim: #5a7a5a;
 
   /* Feedback */
   --correct: #39ff14;
   --wrong: #ff4444;
-
-  /* Timer */
-  --timer-green: #39ff14;
-  --timer-amber: #ffe600;
-  --timer-red: #ff4444;
 }
 
 @theme inline {
@@ -38,6 +34,7 @@
   --color-bg-secondary: var(--bg-secondary);
   --color-bg-panel: var(--bg-panel);
   --color-border-arcade: var(--border-arcade);
+  --color-border-bright: var(--border-bright);
   --color-green-glow: var(--green-glow);
   --color-green-primary: var(--green-primary);
   --color-green-light: var(--green-light);
@@ -54,7 +51,7 @@
   --font-pixel: "Press Start 2P", monospace;
 }
 
-/* Scanlines overlay — subtle CRT effect */
+/* Scanlines overlay — subtle CRT */
 body::after {
   content: "";
   position: fixed;
@@ -68,15 +65,20 @@ body::after {
     0deg,
     transparent,
     transparent 2px,
-    rgba(0, 0, 0, 0.08) 2px,
-    rgba(0, 0, 0, 0.08) 4px
+    rgba(0, 0, 0, 0.06) 2px,
+    rgba(0, 0, 0, 0.06) 4px
   );
 }
 
 body {
   background: var(--bg-primary);
+  background-image: url('/images/pixel-bg.svg');
+  background-size: 320px 320px;
+  background-repeat: repeat;
+  background-attachment: fixed;
   color: var(--text-primary);
   font-family: var(--font-sans);
+  font-weight: 600;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overscroll-behavior: none;
@@ -90,69 +92,56 @@ html, body {
 
 .arcade-panel {
   background: var(--bg-panel);
-  border: 2px solid var(--border-arcade);
-  box-shadow: 0 0 15px rgba(57, 255, 20, 0.05), inset 0 0 30px rgba(0, 0, 0, 0.3);
+  border: 3px solid var(--border-arcade);
+  box-shadow:
+    0 0 15px rgba(57, 255, 20, 0.06),
+    inset 0 0 30px rgba(0, 0, 0, 0.4);
 }
 
 .arcade-btn {
-  border: 2px solid var(--border-arcade);
+  border: 3px solid var(--border-bright);
   background: var(--bg-panel);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  transition: all 150ms ease;
+  transition: all 120ms ease;
+}
+
+.arcade-btn:hover {
+  border-color: var(--green-glow);
+  box-shadow: 0 0 12px rgba(57, 255, 20, 0.25);
 }
 
 .arcade-btn:active {
   border-color: var(--green-glow);
-  box-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+  box-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
   transform: scale(0.97);
 }
 
-/* Glow text effects — used sparingly */
+/* Glow text effects */
 .glow-green {
-  text-shadow: 0 0 10px rgba(57, 255, 20, 0.6), 0 0 20px rgba(57, 255, 20, 0.3);
+  text-shadow: 0 0 10px rgba(57, 255, 20, 0.7), 0 0 30px rgba(57, 255, 20, 0.3);
 }
 
 .glow-accent {
-  text-shadow: 0 0 10px rgba(232, 184, 109, 0.6), 0 0 20px rgba(232, 184, 109, 0.3);
-}
-
-/* Pixel grid background — very subtle */
-.pixel-grid {
-  background-image:
-    linear-gradient(rgba(57, 255, 20, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(57, 255, 20, 0.03) 1px, transparent 1px);
-  background-size: 20px 20px;
+  text-shadow: 0 0 10px rgba(232, 184, 109, 0.7), 0 0 30px rgba(232, 184, 109, 0.3);
 }
 
 /* ===== Animations ===== */
 
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes floatUp {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(-40px);
-  }
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-50px); }
 }
 
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
-  20%, 60% { transform: translateX(-4px); }
-  40%, 80% { transform: translateX(4px); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
 }
 
 @keyframes blink {
@@ -162,25 +151,11 @@ html, body {
 
 @keyframes pulseGlow {
   0%, 100% { box-shadow: 0 0 5px rgba(57, 255, 20, 0.2); }
-  50% { box-shadow: 0 0 20px rgba(57, 255, 20, 0.4), 0 0 40px rgba(57, 255, 20, 0.1); }
+  50% { box-shadow: 0 0 25px rgba(57, 255, 20, 0.5), 0 0 50px rgba(57, 255, 20, 0.15); }
 }
 
-.animate-fade-in-up {
-  animation: fadeInUp 200ms ease-out forwards;
-}
-
-.animate-float-up {
-  animation: floatUp 1.2s ease-out forwards;
-}
-
-.animate-shake {
-  animation: shake 300ms ease-in-out;
-}
-
-.animate-blink {
-  animation: blink 1s infinite;
-}
-
-.animate-pulse-glow {
-  animation: pulseGlow 2s ease-in-out infinite;
-}
+.animate-fade-in-up { animation: fadeInUp 200ms ease-out forwards; }
+.animate-float-up { animation: floatUp 1.2s ease-out forwards; }
+.animate-shake { animation: shake 300ms ease-in-out; }
+.animate-blink { animation: blink 1s infinite; }
+.animate-pulse-glow { animation: pulseGlow 2s ease-in-out infinite; }

@@ -28,19 +28,22 @@ export default function AnswerButton({
   isCorrect,
   showResult,
 }: AnswerButtonProps) {
-  let borderColor = ACCENT_COLORS[index];
+  let borderColor = "var(--border-bright)";
+  let leftColor = ACCENT_COLORS[index];
   let bgStyle = "var(--bg-panel)";
   let glowStyle = "none";
 
   if (showResult) {
     if (isCorrect) {
       borderColor = "var(--correct)";
-      bgStyle = "rgba(57, 255, 20, 0.1)";
-      glowStyle = "0 0 15px rgba(57, 255, 20, 0.3)";
+      leftColor = "var(--correct)";
+      bgStyle = "rgba(57, 255, 20, 0.12)";
+      glowStyle = "0 0 20px rgba(57, 255, 20, 0.35)";
     } else if (isSelected) {
       borderColor = "var(--wrong)";
-      bgStyle = "rgba(255, 68, 68, 0.1)";
-      glowStyle = "0 0 15px rgba(255, 68, 68, 0.3)";
+      leftColor = "var(--wrong)";
+      bgStyle = "rgba(255, 68, 68, 0.12)";
+      glowStyle = "0 0 20px rgba(255, 68, 68, 0.35)";
     }
   }
 
@@ -49,34 +52,35 @@ export default function AnswerButton({
       onClick={onSelect}
       disabled={disabled}
       className={`
-        w-full min-h-[56px] px-4 py-3 rounded-lg text-left
-        font-semibold text-text-primary text-base
-        border-2 border-solid
+        w-full min-h-[64px] px-5 py-4 rounded-lg text-left
+        font-bold text-text-primary text-lg
+        border-3 border-solid
         transition-all duration-100 ease-out
-        ${!disabled ? "active:scale-[0.97]" : ""}
+        ${!disabled ? "active:scale-[0.97] hover:border-green-glow" : ""}
         ${disabled ? "cursor-default" : "cursor-pointer"}
       `}
       style={{
         borderColor,
-        borderLeftWidth: "4px",
+        borderLeftWidth: "6px",
+        borderLeftColor: leftColor,
         background: bgStyle,
         boxShadow: glowStyle,
         touchAction: "manipulation",
       }}
     >
-      <span className="flex items-center gap-3">
+      <span className="flex items-center gap-4">
         <span
-          className="flex-shrink-0 w-7 h-7 rounded flex items-center justify-center font-[family-name:var(--font-press-start)] text-[9px] text-bg-primary font-bold"
-          style={{ backgroundColor: borderColor }}
+          className="flex-shrink-0 w-9 h-9 rounded flex items-center justify-center font-[family-name:var(--font-press-start)] text-[10px] text-bg-primary font-bold"
+          style={{ backgroundColor: leftColor }}
         >
           {LABELS[index]}
         </span>
         <span className="flex-1">{text}</span>
         {showResult && isCorrect && (
-          <span className="text-correct text-xl glow-green">&#10003;</span>
+          <span className="text-correct text-2xl glow-green font-bold">&#10003;</span>
         )}
         {showResult && isSelected && !isCorrect && (
-          <span className="text-wrong text-xl">&#10007;</span>
+          <span className="text-wrong text-2xl font-bold">&#10007;</span>
         )}
       </span>
     </button>

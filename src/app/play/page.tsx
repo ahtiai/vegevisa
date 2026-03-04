@@ -94,12 +94,12 @@ function PlayGame() {
   }, [Math.ceil(timeRemaining), state.phase, play, timeRemaining]);
 
   return (
-    <main className="flex-1 flex flex-col px-4 py-4 max-w-lg mx-auto w-full">
+    <main className="flex-1 flex flex-col px-5 py-5 max-w-lg mx-auto w-full">
       <SoundToggle isMuted={isMuted} onToggle={toggleMute} />
 
       {/* Header */}
-      <div className="text-center mb-3">
-        <h1 className="font-[family-name:var(--font-press-start)] text-sm text-green-glow glow-green">
+      <div className="text-center mb-4">
+        <h1 className="font-[family-name:var(--font-press-start)] text-base text-green-glow glow-green">
           VEGEVISA
         </h1>
       </div>
@@ -109,7 +109,7 @@ function PlayGame() {
       {(state.phase === "playing" || state.phase === "feedback") && currentQuestion && (
         <div className="flex-1 flex flex-col animate-fade-in-up">
           {/* Timer */}
-          <div className="mb-4">
+          <div className="mb-5">
             <TimerBar
               timeRemaining={timeRemaining}
               totalTime={totalTime}
@@ -119,19 +119,19 @@ function PlayGame() {
           </div>
 
           {/* Question */}
-          <div className="mb-5">
+          <div className="mb-6">
             <QuestionCard question={currentQuestion.question} />
           </div>
 
           {/* Points feedback */}
           {state.phase === "feedback" && (
-            <div className="text-center mb-3">
+            <div className="text-center mb-4">
               {state.isCorrect ? (
-                <span className="font-[family-name:var(--font-press-start)] text-xs text-correct glow-green animate-float-up inline-block">
+                <span className="font-[family-name:var(--font-press-start)] text-sm text-correct glow-green animate-float-up inline-block">
                   OIKEIN! +{state.pointsEarned}
                 </span>
               ) : (
-                <span className="font-[family-name:var(--font-press-start)] text-xs text-wrong">
+                <span className="font-[family-name:var(--font-press-start)] text-sm text-wrong">
                   {state.selectedAnswer === -1 ? "AIKA LOPPUI!" : "VÄÄRIN!"}
                 </span>
               )}
@@ -139,7 +139,7 @@ function PlayGame() {
           )}
 
           {/* Answer buttons */}
-          <div className="space-y-3 mt-auto pb-4">
+          <div className="space-y-3 mt-auto pb-5">
             {currentQuestion.options.map((option, i) => (
               <AnswerButton
                 key={`${state.currentQuestionIndex}-${i}`}
@@ -164,7 +164,7 @@ export default function PlayPage() {
     <Suspense
       fallback={
         <div className="flex-1 flex items-center justify-center">
-          <div className="font-[family-name:var(--font-press-start)] text-xs text-green-glow glow-green animate-blink">
+          <div className="font-[family-name:var(--font-press-start)] text-sm text-green-glow glow-green animate-blink">
             LADATAAN...
           </div>
         </div>
