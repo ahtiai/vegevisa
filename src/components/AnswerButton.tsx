@@ -4,7 +4,7 @@ const ACCENT_COLORS = [
   "var(--green-glow)",
   "var(--accent)",
   "var(--green-light)",
-  "var(--brown-warm)",
+  "var(--green-teal)",
 ];
 
 const LABELS = ["A", "B", "C", "D"];

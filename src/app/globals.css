@@ -14,10 +14,10 @@
   --green-light: #A8C7A0;
   --green-bright: #7CFC00;
 
-  /* Accents */
-  --accent: #f0c860;
-  --accent-glow: #ffe600;
-  --brown-warm: #a08848;
+  /* Accents (green theme) */
+  --accent: #7CFC00;
+  --accent-glow: #66ff66;
+  --green-teal: #00cc88;
 
   /* Text */
   --text-primary: #f0f0e0;
@@ -41,7 +41,7 @@
   --color-green-bright: var(--green-bright);
   --color-accent: var(--accent);
   --color-accent-glow: var(--accent-glow);
-  --color-brown-warm: var(--brown-warm);
+  --color-green-teal: var(--green-teal);
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
   --color-text-dim: var(--text-dim);
@@ -71,11 +71,7 @@ body::after {
 }
 
 body {
-  background: #2a4020;
-  background-image: url('/images/pixel-bg.svg');
-  background-size: cover;
-  background-position: top center;
-  background-attachment: fixed;
+  background: #1a3520;
   color: var(--text-primary);
   font-family: var(--font-sans);
   font-weight: 600;
@@ -125,7 +121,7 @@ html, body {
 }
 
 .glow-accent {
-  text-shadow: 0 0 10px rgba(232, 184, 109, 0.7), 0 0 30px rgba(232, 184, 109, 0.3);
+  text-shadow: 0 0 10px rgba(124, 252, 0, 0.7), 0 0 30px rgba(124, 252, 0, 0.3);
 }
 
 /* ===== Animations ===== */

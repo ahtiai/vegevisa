@@ -11,7 +11,7 @@ interface ShareButtonsProps {
 export default function ShareButtons({ score, correct, total }: ShareButtonsProps) {
   const [copied, setCopied] = useState(false);
 
-  const shareText = `🌿 Pelasin VegeVisaa ja sain ${score.toLocaleString("fi-FI")} pistettä (${correct}/${total} oikein)!\nTestaa oma kasvistietosi: provege.fi/vegevisa\n#VegeVisa #ProVege`;
+  const shareText = `🌿 Pelasin VegeVisaa ja sain ${score.toLocaleString("fi-FI")} pistettä (${correct}/${total} oikein)!\nTestaa oma tietämyksesi: provege.fi/vegevisa\n#VegeVisa #ProVege`;
   const shareUrl = "https://provege.fi/vegevisa";
   const encoded = encodeURIComponent(shareText);
 

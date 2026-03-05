@@ -4,10 +4,16 @@ import { useState, useEffect } from "react";
 
 interface CountdownProps {
   onComplete: () => void;
+  onStart?: () => void;
 }
 
-export default function Countdown({ onComplete }: CountdownProps) {
+export default function Countdown({ onComplete, onStart }: CountdownProps) {
   const [count, setCount] = useState(3);
+
+  useEffect(() => {
+    onStart?.();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (count === 0) {

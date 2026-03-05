@@ -1,10 +1,11 @@
 "use client";
 
-import { Suspense, useState, useEffect } from "react";
+import { Suspense, useState, useEffect, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { getScorePercentage, getRankTitle } from "@/lib/scoring";
 import { useLeaderboard } from "@/hooks/useLeaderboard";
+import { useSound } from "@/hooks/useSound";
 import ScoreDisplay from "@/components/ScoreDisplay";
 import NameInput from "@/components/NameInput";
 import ShareButtons from "@/components/ShareButtons";
@@ -21,12 +22,22 @@ function ResultsContent() {
   const rank = getRankTitle(percentage);
 
   const { data, loading, fetchLeaderboard, submitScore } = useLeaderboard();
+  const { play, stop, initSounds } = useSound();
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     fetchLeaderboard();
-  }, [fetchLeaderboard]);
+    initSounds();
+  }, [fetchLeaderboard, initSounds]);
+
+  const handleTallyStart = useCallback(() => {
+    play("pointsCounter");
+  }, [play]);
+
+  const handleTallyEnd = useCallback(() => {
+    stop("pointsCounter");
+  }, [stop]);
 
   const handleSubmitScore = async (name: string) => {
     setSubmitting(true);
@@ -54,7 +65,7 @@ function ResultsContent() {
       </h1>
 
       {/* Score */}
-      <ScoreDisplay score={score} />
+      <ScoreDisplay score={score} onTallyStart={handleTallyStart} onTallyEnd={handleTallyEnd} />
 
       {/* Stats */}
       <p className="font-[family-name:var(--font-press-start)] text-xs text-white/70 mt-5">

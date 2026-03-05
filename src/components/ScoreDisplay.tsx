@@ -1,14 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface ScoreDisplayProps {
   score: number;
   duration?: number;
+  onTallyStart?: () => void;
+  onTallyEnd?: () => void;
 }
 
-export default function ScoreDisplay({ score, duration = 1500 }: ScoreDisplayProps) {
+export default function ScoreDisplay({ score, duration = 1500, onTallyStart, onTallyEnd }: ScoreDisplayProps) {
   const [displayed, setDisplayed] = useState(0);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
     if (score === 0) {
@@ -16,19 +19,33 @@ export default function ScoreDisplay({ score, duration = 1500 }: ScoreDisplayPro
       return;
     }
 
-    const steps = 30;
-    const increment = score / steps;
-    const stepDuration = duration / steps;
-    let step = 0;
+    // Small delay to ensure sound is initialized before tally starts
+    const startDelay = setTimeout(() => {
+      onTallyStart?.();
 
-    const interval = setInterval(() => {
-      step++;
-      setDisplayed(Math.min(Math.round(increment * step), score));
-      if (step >= steps) clearInterval(interval);
-    }, stepDuration);
+      const steps = 30;
+      const increment = score / steps;
+      const stepDuration = duration / steps;
+      let step = 0;
 
-    return () => clearInterval(interval);
-  }, [score, duration]);
+      const interval = setInterval(() => {
+        step++;
+        setDisplayed(Math.min(Math.round(increment * step), score));
+        if (step >= steps) {
+          clearInterval(interval);
+          onTallyEnd?.();
+        }
+      }, stepDuration);
+
+      intervalRef.current = interval;
+    }, 300);
+
+    return () => {
+      clearTimeout(startDelay);
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [score, duration, onTallyStart, onTallyEnd]);
 
   return (
     <div className="text-center arcade-panel rounded-xl px-10 py-8">

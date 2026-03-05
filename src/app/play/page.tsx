@@ -17,14 +17,16 @@ function PlayGame() {
 
   const { state, currentQuestion, startGame, beginPlay, answerQuestion, timeUp, nextQuestion } =
     useGameState();
-  const { play, initSounds, stopBgMusic } = useSound();
+  const { play, stop, initSounds } = useSound();
   const feedbackTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [showQuitModal, setShowQuitModal] = useState(false);
+  const timeIsUpPlayedRef = useRef(false);
 
   const handleTimeUp = useCallback(() => {
+    stop("timeIsUp");
     timeUp();
     play("wrong");
-  }, [timeUp, play]);
+  }, [timeUp, play, stop]);
 
   const { timeRemaining, start: startTimer, stop: stopTimer, pause: pauseTimer, resume: resumeTimer, totalTime } = useTimer(handleTimeUp);
 
@@ -51,22 +53,20 @@ function PlayGame() {
 
   useEffect(() => {
     if (state.phase === "results") {
-      stopBgMusic();
-      play("gameover");
-
       const params = new URLSearchParams({
         score: String(state.score),
         correct: String(state.correctAnswers),
         total: String(state.totalQuestions),
         time: String(Math.round((state.gameEndTime - state.gameStartTime) / 1000)),
       });
-      window.location.href = `/results?${params.toString()}`;
+      router.push(`/results?${params.toString()}`);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.phase]);
 
   const handleAnswer = (index: number) => {
     if (state.phase !== "playing") return;
+    stop("timeIsUp");
     initSounds();
     answerQuestion(index, timeRemaining);
     const question = currentQuestion!;
@@ -77,12 +77,14 @@ function PlayGame() {
     }
   };
 
-  const handleCountdownComplete = useCallback(() => {
+  const handleCountdownStart = useCallback(() => {
     initSounds();
     play("countdown");
+  }, [play, initSounds]);
+
+  const handleCountdownComplete = useCallback(() => {
     beginPlay();
-    play("bgMusic");
-  }, [beginPlay, play, initSounds]);
+  }, [beginPlay]);
 
   const handleQuitPress = () => {
     pauseTimer();
@@ -102,19 +104,35 @@ function PlayGame() {
   };
 
   const handleQuitConfirm = () => {
-    stopBgMusic();
+    stop("countdown");
+    stop("timeIsUp");
     router.push("/");
   };
 
+  // Keyboard shortcuts A/B/C/D for answers
   useEffect(() => {
-    if (state.phase === "playing" && timeRemaining <= 5 && timeRemaining > 0) {
-      const whole = Math.ceil(timeRemaining);
-      const diff = timeRemaining - (whole - 1);
-      if (diff < 0.1) {
-        play("tick");
+    const handler = (e: KeyboardEvent) => {
+      if (state.phase !== "playing" || showQuitModal) return;
+      const key = e.key.toLowerCase();
+      const map: Record<string, number> = { a: 0, b: 1, c: 2, d: 3 };
+      if (key in map && currentQuestion && map[key] < currentQuestion.options.length) {
+        handleAnswer(map[key]);
       }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [state.phase, showQuitModal, currentQuestion]);
+
+  // Play time-is-up sound when 5 seconds left
+  useEffect(() => {
+    if (state.phase !== "playing") return;
+    if (timeRemaining > 5) {
+      timeIsUpPlayedRef.current = false;
+    } else if (timeRemaining > 0 && !timeIsUpPlayedRef.current) {
+      timeIsUpPlayedRef.current = true;
+      play("timeIsUp");
     }
-  }, [Math.ceil(timeRemaining), state.phase, play, timeRemaining]);
+  }, [state.phase, timeRemaining, play]);
 
   return (
     <main className="flex-1 flex flex-col px-5 py-5 max-w-lg mx-auto w-full">
@@ -134,7 +152,7 @@ function PlayGame() {
         </button>
       </div>
 
-      {state.phase === "countdown" && <Countdown onComplete={handleCountdownComplete} />}
+      {state.phase === "countdown" && <Countdown onStart={handleCountdownStart} onComplete={handleCountdownComplete} />}
 
       {(state.phase === "playing" || state.phase === "feedback") && currentQuestion && (
         <div className="flex-1 flex flex-col animate-fade-in-up">

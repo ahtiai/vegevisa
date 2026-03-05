@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "VegeVisa — Kasvistietovisailu";
+export const alt = "VegeVisa";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -16,7 +16,7 @@ export default function OGImage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(180deg, #4a90c4 0%, #6a9848 35%, #c4a840 55%, #a08424 100%)",
+          background: "linear-gradient(180deg, #0f2810 0%, #1a3520 40%, #1e4025 70%, #1a3520 100%)",
           position: "relative",
         }}
       >
@@ -72,18 +72,6 @@ export default function OGImage() {
             </div>
             <div
               style={{
-                fontSize: 24,
-                color: "rgba(255,255,255,0.7)",
-                marginTop: 16,
-                letterSpacing: "0.15em",
-                fontFamily: "monospace",
-                display: "flex",
-              }}
-            >
-              KASVISTIETOVISA
-            </div>
-            <div
-              style={{
                 fontSize: 32,
                 color: "rgba(255,255,255,0.9)",
                 marginTop: 28,
@@ -91,7 +79,7 @@ export default function OGImage() {
                 display: "flex",
               }}
             >
-              Testaa kasvistietosi! 🌿
+              Testaa tietämyksesi! 🌿
             </div>
           </div>
 

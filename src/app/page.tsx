@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function StartScreen() {
   const router = useRouter();
@@ -17,11 +18,8 @@ export default function StartScreen() {
         <h1 className="font-[family-name:var(--font-press-start)] text-3xl sm:text-4xl text-green-glow glow-green leading-relaxed">
           VEGEVISA
         </h1>
-        <div className="mt-4 font-[family-name:var(--font-press-start)] text-xs text-text-secondary tracking-widest">
-          KASVISTIETOVISA
-        </div>
         <p className="mt-5 text-text-secondary text-xl font-bold">
-          Testaa kasvistietosi!
+          Testaa tietämyksesi!
         </p>
       </div>
 
@@ -52,14 +50,20 @@ export default function StartScreen() {
       </Link>
 
       {/* Footer */}
-      <footer className="mt-auto pt-10 text-center text-sm text-text-dim font-bold">
+      <footer className="mt-auto pt-10 flex flex-col items-center gap-3">
         <a
           href="https://provege.fi"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-text-secondary transition-colors"
+          className="hover:opacity-80 transition-opacity"
         >
-          provege.fi
+          <Image
+            src="/images/provege-pixel.svg"
+            alt="Pro Vege"
+            width={160}
+            height={32}
+            className="opacity-70 hover:opacity-100 transition-opacity"
+          />
         </a>
       </footer>
     </main>

@@ -15,13 +15,13 @@ export default function TimerBar({ timeRemaining, totalTime, questionNumber, tot
   const barColor = isCritical
     ? "var(--wrong)"
     : isUrgent
-      ? "var(--accent-glow)"
+      ? "#ffaa00"
       : "var(--green-glow)";
 
   const glowColor = isCritical
     ? "rgba(255, 68, 68, 0.5)"
     : isUrgent
-      ? "rgba(255, 230, 0, 0.5)"
+      ? "rgba(255, 170, 0, 0.5)"
       : "rgba(57, 255, 20, 0.4)";
 
   return (
