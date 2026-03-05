@@ -1,0 +1,21 @@
+id,question,option_a,option_b,option_c,option_d,correct,difficulty,active
+q1,Minä vuonna Pro Vege on perustettu?,2023,2025,2021,2019,a,easy,TRUE
+q2,Kuinka monta jäsentä Pro Vegellä on tällä hetkellä?,79,42,23,15,b,easy,TRUE
+q3,Mistä maakunnasta Pro Vegellä on eniten jäseniä Uudenmaan jälkeen?,Varsinais-Suomi,Etelä-Pohjanmaa,Kymenlaakso,Pohjois-Savo,b,medium,TRUE
+q4,"Kuinka paljon suomalainen aikuinen syö palkokasveja keskimäärin päivässä, kun ravitsemussuositusten mukainen määrä on 50-100g?",3g,13g,32g,55g,a,medium,TRUE
+q5,Ruuan osuus ympäristövaikutuksiin on merkittävä. Suomessa ruuan osuus luontoa kuormittavista tekijöistä on jopa...,15%,23%,36%,42%,d,hard,TRUE
+q6,"Vuoden 2025 Ilmastobarometrin mukaan, kuinka moni suomalaisista toivoo, että kasvisruoka olisi edullisempaa kuin korkeapäästöisempi ruoka?",34%,52%,69%,88%,c,medium,TRUE
+q7,"Jos tanskalaiset söisivät ravitsemussuositusten mukaisesti, se säästäisi tutkimuksen mukaan terveydenhoitokuluja vuodessa...","0,7mrd€","1,4mrd€","1,9mrd€","2,7mrd€",d,hard,TRUE
+q8,Kasvipohjaisten proteiinien toimiala on tehokas kohde päästövähennyksiin tähtääville investoinneille. Kuinka monta kertaa tehokkaampi kuin sementti?,"1,5",3,6,9,b,hard,TRUE
+q9,Mikä seuraavista kasveista sisältää eniten proteiinia per 100g?,Riisi,Soijapapu,Peruna,Banaani,b,easy,TRUE
+q10,"Kuinka paljon kasvihuonekaasupäästöjä voitaisiin vähentää, jos kaikki suomalaiset siirtyisivät kasvispainotteiseen ruokavalioon?",5%,15%,30%,50%,c,medium,TRUE
+q11,Mikä seuraavista EI ole palkokasvi?,Linssi,Kikherne,Kvinoa,Härkäpapu,c,easy,TRUE
+q12,Kuinka monta litraa vettä tarvitaan yhden kilogramman naudanlihan tuottamiseen?,1 500 litraa,5 000 litraa,10 000 litraa,15 000 litraa,d,medium,TRUE
+q13,Mikä on Suomen suosituin kasviproteiinin lähde?,Tofu,Härkis (härkäpapu),Nyhtökaura,Seitan,c,easy,TRUE
+q14,Kuinka suuri osa maailman viljelysmaasta käytetään eläinten rehun tuotantoon?,15%,33%,50%,77%,d,hard,TRUE
+q15,Mikä seuraavista vitamiineista on erityisen tärkeä vegaaniruokavaliossa täydentää?,C-vitamiini,B12-vitamiini,A-vitamiini,K-vitamiini,b,easy,TRUE
+q16,Kuinka monta prosenttia maailman kasvihuonekaasupäästöistä tulee karjataloudesta?,4%,8%,"14,5%",25%,c,medium,TRUE
+q17,Mikä maa on maailman suurin soijantuottaja?,Kiina,Brasilia,Yhdysvallat,Intia,b,medium,TRUE
+q18,Suomessa toimii useita kasvisruokaan erikoistuneita yrityksiä. Mikä seuraavista on suomalainen yritys?,Beyond Meat,Oatly,Gold&Green (Nyhtökaura),Impossible Foods,c,easy,TRUE
+q19,Kuinka monta prosenttia suomalaisista ilmoittaa syövänsä kasvisruokaa vähintään kerran viikossa?,20%,35%,50%,65%,c,medium,TRUE
+q20,Härkäpapu on suosittu suomalainen kasviproteiini. Missä päin Suomea sitä viljellään eniten?,Lappi,Etelä-Suomi,Keski-Suomi,Pohjois-Pohjanmaa,b,easy,TRUE

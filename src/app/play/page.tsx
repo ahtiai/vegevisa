@@ -2,6 +2,7 @@
 
 import { useEffect, useCallback, useRef, useState, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
+import Image from "next/image";
 import { useGameState } from "@/hooks/useGameState";
 import { useTimer } from "@/hooks/useTimer";
 import { useSound } from "@/hooks/useSound";
@@ -169,6 +170,11 @@ function PlayGame() {
           {/* Question */}
           <div className="mb-6">
             <QuestionCard question={currentQuestion.question} />
+          </div>
+
+          {/* Pro Vege logo */}
+          <div className="flex justify-center mb-4">
+            <Image src="/images/provege-pixel.svg" alt="Pro Vege" width={120} height={24} className="opacity-30" />
           </div>
 
           {/* Answer buttons */}

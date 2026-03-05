@@ -3,6 +3,7 @@
 import { Suspense, useState, useEffect, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { getScorePercentage, getRankTitle } from "@/lib/scoring";
 import { useLeaderboard } from "@/hooks/useLeaderboard";
 import { useSound } from "@/hooks/useSound";
@@ -113,6 +114,13 @@ function ResultsContent() {
           [ HIGH SCORES ]
         </Link>
       </div>
+
+      {/* Pro Vege logo */}
+      <footer className="mt-10 flex justify-center">
+        <a href="https://provege.fi" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+          <Image src="/images/provege-pixel.svg" alt="Pro Vege" width={160} height={32} className="opacity-70 hover:opacity-100 transition-opacity" />
+        </a>
+      </footer>
     </main>
   );
 }

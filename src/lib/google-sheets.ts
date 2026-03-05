@@ -7,44 +7,83 @@ export interface RawQuestion {
   option_d: string;
   correct: "a" | "b" | "c" | "d";
   difficulty: string;
-  category: string;
   active: string;
 }
 
-export async function fetchQuestionsFromSheets(): Promise<RawQuestion[]> {
-  const apiKey = process.env.GOOGLE_SHEETS_API_KEY;
-  const spreadsheetId = process.env.GOOGLE_SHEETS_SPREADSHEET_ID;
-  const sheetName = process.env.GOOGLE_SHEETS_SHEET_NAME || "Questions";
+function parseCSV(text: string): string[][] {
+  const rows: string[][] = [];
+  let current = "";
+  let inQuotes = false;
+  let row: string[] = [];
 
-  if (!apiKey || !spreadsheetId) {
-    throw new Error("Google Sheets credentials not configured");
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+
+    if (inQuotes) {
+      if (ch === '"' && text[i + 1] === '"') {
+        current += '"';
+        i++;
+      } else if (ch === '"') {
+        inQuotes = false;
+      } else {
+        current += ch;
+      }
+    } else {
+      if (ch === '"') {
+        inQuotes = true;
+      } else if (ch === ",") {
+        row.push(current);
+        current = "";
+      } else if (ch === "\n" || (ch === "\r" && text[i + 1] === "\n")) {
+        row.push(current);
+        current = "";
+        if (row.some((cell) => cell.trim())) rows.push(row);
+        row = [];
+        if (ch === "\r") i++;
+      } else {
+        current += ch;
+      }
+    }
+  }
+  row.push(current);
+  if (row.some((cell) => cell.trim())) rows.push(row);
+
+  return rows;
+}
+
+export async function fetchQuestionsFromSheets(): Promise<RawQuestion[]> {
+  const csvUrl = process.env.GOOGLE_SHEETS_CSV_URL;
+
+  if (!csvUrl) {
+    throw new Error("GOOGLE_SHEETS_CSV_URL not configured");
   }
 
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${encodeURIComponent(sheetName)}?key=${apiKey}`;
-  const res = await fetch(url, { next: { revalidate: 300 } }); // cache 5 min
+  const url = csvUrl;
+  const res = await fetch(url, { next: { revalidate: 300 } });
 
   if (!res.ok) {
-    throw new Error(`Google Sheets API error: ${res.status}`);
+    throw new Error(`Google Sheets CSV fetch error: ${res.status}`);
   }
 
-  const data = await res.json();
-  const rows: string[][] = data.values;
+  const text = await res.text();
+  const rows = parseCSV(text);
 
-  if (!rows || rows.length < 2) {
+  if (rows.length < 2) {
     throw new Error("No question data found in sheet");
   }
 
-  const headers = rows[0].map((h: string) => h.toLowerCase().trim());
+  const headers = rows[0].map((h) => h.toLowerCase().trim());
   const questions: RawQuestion[] = [];
 
   for (let i = 1; i < rows.length; i++) {
     const row = rows[i];
     const obj: Record<string, string> = {};
-    headers.forEach((header: string, idx: number) => {
-      obj[header] = row[idx] || "";
+    headers.forEach((header, idx) => {
+      obj[header] = (row[idx] || "").trim();
     });
 
     if (obj.active?.toUpperCase() === "FALSE") continue;
+    if (!obj.question) continue;
 
     questions.push({
       id: obj.id || `q${i}`,
@@ -55,7 +94,6 @@ export async function fetchQuestionsFromSheets(): Promise<RawQuestion[]> {
       option_d: obj.option_d,
       correct: obj.correct?.toLowerCase() as RawQuestion["correct"],
       difficulty: obj.difficulty || "medium",
-      category: obj.category || "",
       active: obj.active || "TRUE",
     });
   }
