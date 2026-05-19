@@ -10,7 +10,7 @@ interface LeaderboardProps {
 }
 
 export default function Leaderboard({ allTime, today, compact = false }: LeaderboardProps) {
-  const [tab, setTab] = useState<"allTime" | "today">("allTime");
+  const [tab, setTab] = useState<"allTime" | "today">("today");
   const entries = tab === "allTime" ? allTime : today;
   const displayEntries = compact ? entries.slice(0, 5) : entries;
 
@@ -19,26 +19,26 @@ export default function Leaderboard({ allTime, today, compact = false }: Leaderb
       {/* Tabs */}
       <div className="flex rounded-lg border-3 border-border-bright overflow-hidden mb-4">
         <button
-          onClick={() => setTab("allTime")}
+          onClick={() => setTab("today")}
           className={`flex-1 py-3 px-4 font-[family-name:var(--font-press-start)] text-[10px] uppercase tracking-wider transition-colors ${
-            tab === "allTime"
+            tab === "today"
               ? "bg-bg-panel text-green-glow border-r-3 border-border-bright"
               : "bg-bg-secondary text-text-dim border-r-3 border-border-bright"
           }`}
           style={{ touchAction: "manipulation" }}
         >
-          All time
+          Tänään
         </button>
         <button
-          onClick={() => setTab("today")}
+          onClick={() => setTab("allTime")}
           className={`flex-1 py-3 px-4 font-[family-name:var(--font-press-start)] text-[10px] uppercase tracking-wider transition-colors ${
-            tab === "today"
+            tab === "allTime"
               ? "bg-bg-panel text-green-glow"
               : "bg-bg-secondary text-text-dim"
           }`}
           style={{ touchAction: "manipulation" }}
         >
-          Tänään
+          All time
         </button>
       </div>
 

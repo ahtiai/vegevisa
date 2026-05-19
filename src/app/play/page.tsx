@@ -65,7 +65,7 @@ function PlayGame() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.phase]);
 
-  const handleAnswer = (index: number) => {
+  const handleAnswer = useCallback((index: number) => {
     if (state.phase !== "playing") return;
     stop("timeIsUp");
     initSounds();
@@ -76,7 +76,7 @@ function PlayGame() {
     } else {
       play("wrong");
     }
-  };
+  }, [answerQuestion, currentQuestion, initSounds, play, state.phase, stop, timeRemaining]);
 
   const handleCountdownStart = useCallback(() => {
     initSounds();
@@ -122,7 +122,7 @@ function PlayGame() {
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [state.phase, showQuitModal, currentQuestion]);
+  }, [state.phase, showQuitModal, currentQuestion, handleAnswer]);
 
   // Play time-is-up sound when 5 seconds left
   useEffect(() => {

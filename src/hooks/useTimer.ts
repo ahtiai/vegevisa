@@ -2,7 +2,7 @@
 
 import { useState, useRef, useCallback, useEffect } from "react";
 
-const TOTAL_TIME = 15;
+const TOTAL_TIME = 30;
 
 export function useTimer(onTimeUp: () => void) {
   const [timeRemaining, setTimeRemaining] = useState(TOTAL_TIME);
@@ -11,7 +11,10 @@ export function useTimer(onTimeUp: () => void) {
   const onTimeUpRef = useRef(onTimeUp);
   const pausedAtRef = useRef<number | null>(null);
   const startTimeRef = useRef(0);
-  onTimeUpRef.current = onTimeUp;
+
+  useEffect(() => {
+    onTimeUpRef.current = onTimeUp;
+  }, [onTimeUp]);
 
   const clearTimer = useCallback(() => {
     if (intervalRef.current) {

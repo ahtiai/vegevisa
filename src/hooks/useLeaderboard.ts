@@ -53,5 +53,15 @@ export function useLeaderboard() {
     [fetchLeaderboard]
   );
 
-  return { data, loading, fetchLeaderboard, submitScore };
+  const resetLeaderboard = useCallback(async () => {
+    const res = await fetch("/api/scores/leaderboard", {
+      method: "DELETE",
+    });
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.error);
+    await fetchLeaderboard();
+    return json;
+  }, [fetchLeaderboard]);
+
+  return { data, loading, fetchLeaderboard, submitScore, resetLeaderboard };
 }

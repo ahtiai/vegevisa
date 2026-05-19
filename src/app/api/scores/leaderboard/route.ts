@@ -42,3 +42,15 @@ export async function GET() {
     today: parseEntries(todayRaw),
   });
 }
+
+export async function DELETE() {
+  const redis = getRedis();
+  const today = new Date().toISOString().slice(0, 10);
+
+  await Promise.all([
+    redis.del(key("leaderboard")),
+    redis.del(key(`leaderboard:${today}`)),
+  ]);
+
+  return NextResponse.json({ success: true });
+}

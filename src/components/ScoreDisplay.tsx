@@ -44,7 +44,6 @@ export default function ScoreDisplay({ score, duration = 1500, onTallyStart, onT
       clearTimeout(startDelay);
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [score, duration, onTallyStart, onTallyEnd]);
 
   return (

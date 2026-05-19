@@ -1,6 +1,6 @@
 const BASE_POINTS = 1000;
 const MAX_BONUS = 1000;
-const TOTAL_TIME = 15; // seconds
+const TOTAL_TIME = 30; // seconds
 
 export function calculateScore(timeRemaining: number): number {
   const bonus = Math.round(MAX_BONUS * (timeRemaining / TOTAL_TIME));
@@ -21,9 +21,9 @@ export interface RankTitle {
 }
 
 export function getRankTitle(percentage: number): RankTitle {
-  if (percentage >= 90) return { title: "Kasvislegenda", emoji: "🌿" };
-  if (percentage >= 70) return { title: "Vihreä mestari", emoji: "🌱" };
-  if (percentage >= 50) return { title: "Lupaava kasvisharrastaja", emoji: "🌻" };
-  if (percentage >= 25) return { title: "Aloitteleva vihertäjä", emoji: "🌾" };
-  return { title: "Kasviskuriositeetti", emoji: "🥕" };
+  if (percentage >= 90) return { title: "Kasvismestari", emoji: "🌿" };
+  if (percentage >= 70) return { title: "Kasvitietäjä", emoji: "🌱" };
+  if (percentage >= 50) return { title: "Kasviskaveri", emoji: "🌻" };
+  if (percentage >= 25) return { title: "Utelias maistelija", emoji: "🌾" };
+  return { title: "Rohkea kokeilija", emoji: "🥕" };
 }

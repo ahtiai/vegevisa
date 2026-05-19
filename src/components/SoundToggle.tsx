@@ -9,8 +9,8 @@ export default function SoundToggle() {
   useEffect(() => {
     const saved = localStorage.getItem("vegevisa-muted");
     const muted = saved !== "false";
-    setIsMuted(muted);
     Howler.volume(muted ? 0 : 1);
+    setTimeout(() => setIsMuted(muted), 0);
   }, []);
 
   const toggle = () => {
