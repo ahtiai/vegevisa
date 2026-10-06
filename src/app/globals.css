@@ -157,3 +157,51 @@ html, body {
 .animate-shake { animation: shake 300ms ease-in-out; }
 .animate-blink { animation: blink 1s infinite; }
 .animate-pulse-glow { animation: pulseGlow 2s ease-in-out infinite; }
+
+form.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.admin-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-weight: 700;
+}
+.admin-form input,
+.admin-form textarea,
+.admin-form select {
+  width: 100%;
+  border: 1px solid var(--color-border-bright);
+  border-radius: 0.5rem;
+  background: var(--color-bg-secondary);
+  color: white;
+  padding: 0.7rem;
+  font: inherit;
+}
+.admin-form input:focus,
+.admin-form textarea:focus,
+.admin-form select:focus {
+  outline: 2px solid var(--color-green-glow);
+  outline-offset: 2px;
+}
+.admin-secondary {
+  display: inline-block;
+  border: 1px solid var(--color-border-bright);
+  border-radius: 0.5rem;
+  padding: 0.65rem 1rem;
+  font-weight: 700;
+}
+.admin-secondary:hover {
+  background: var(--color-bg-panel);
+}
+.admin-form button:disabled,
+.admin-secondary:disabled {
+  cursor: wait;
+  opacity: 0.5;
+}
+
+.admin-form label:has(input[type="checkbox"]) {
+  flex-direction: row;
+}

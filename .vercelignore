@@ -1,0 +1,9 @@
+.env*
+!.env.example
+.local-postgres/
+.superpowers/
+backups/
+test-results/
+playwright-report/
+.agents/
+skills-lock.json

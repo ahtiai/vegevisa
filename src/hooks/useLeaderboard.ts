@@ -1,67 +1,33 @@
 "use client";
-
 import { useState, useCallback } from "react";
-
-export interface LeaderboardEntry {
-  player_name: string;
-  score: number;
-  correct_answers: number;
-  total_questions: number;
-  created_at: string;
-}
-
-export interface LeaderboardData {
-  allTime: LeaderboardEntry[];
-  today: LeaderboardEntry[];
-}
-
+import { requestJSON } from "@/lib/client-api";
+import type { LeaderboardData, ScoreInput } from "@/lib/quiz-types";
+export type { LeaderboardData, LeaderboardEntry } from "@/lib/quiz-types";
 export function useLeaderboard() {
-  const [data, setData] = useState<LeaderboardData | null>(null);
-  const [loading, setLoading] = useState(false);
-
+  const [data, setData] = useState<LeaderboardData | null>(null),
+    [loading, setLoading] = useState(false),
+    [error, setError] = useState("");
   const fetchLeaderboard = useCallback(async () => {
     setLoading(true);
+    setError("");
     try {
-      const res = await fetch("/api/scores/leaderboard");
-      const json = await res.json();
-      setData(json);
-    } catch (err) {
-      console.error("Failed to fetch leaderboard:", err);
+      setData(await requestJSON<LeaderboardData>("/api/scores/leaderboard"));
+    } catch (e) {
+      setError((e as Error).message);
     } finally {
       setLoading(false);
     }
   }, []);
-
   const submitScore = useCallback(
-    async (params: {
-      playerName: string;
-      score: number;
-      correctAnswers: number;
-      totalQuestions: number;
-      timePlayedSeconds: number;
-    }) => {
-      const res = await fetch("/api/scores", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(params),
-      });
-      const json = await res.json();
-      if (!res.ok) throw new Error(json.error);
+    async (params: ScoreInput) => {
+      const result = await requestJSON<{ success: true; rank: number }>(
+        "/api/scores",
+        { method: "POST", body: JSON.stringify(params) },
+      );
       await fetchLeaderboard();
-      return json;
+      return result;
     },
-    [fetchLeaderboard]
+    [fetchLeaderboard],
   );
-
-  const resetLeaderboard = useCallback(async () => {
-    const res = await fetch("/api/scores/leaderboard", {
-      method: "DELETE",
-    });
-    const json = await res.json();
-    if (!res.ok) throw new Error(json.error);
-    await fetchLeaderboard();
-    return json;
-  }, [fetchLeaderboard]);
-
-  return { data, loading, fetchLeaderboard, submitScore, resetLeaderboard };
+  return { data, loading, error, fetchLeaderboard, submitScore };
 }

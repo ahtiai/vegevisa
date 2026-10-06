@@ -1,53 +1,45 @@
-import { NextRequest, NextResponse } from "next/server";
-import { fetchQuestionsFromSheets, RawQuestion } from "@/lib/google-sheets";
+import { getGameData } from "@/lib/quiz-store";
 import { shuffle } from "@/lib/shuffle";
-import fallbackQuestions from "@/data/questions-fallback.json";
-
+import { json, apiError } from "@/lib/api";
+import { AppError } from "@/lib/errors";
+export const dynamic = "force-dynamic";
 export interface QuestionResponse {
   id: string;
   question: string;
   options: string[];
   correctIndex: number;
 }
-
-function formatQuestions(raw: RawQuestion[], count: number): QuestionResponse[] {
-  const selected = shuffle(raw).slice(0, count);
-
-  return selected.map((q) => {
-    const optionMap: Record<string, string> = {
-      a: q.option_a,
-      b: q.option_b,
-      c: q.option_c,
-      d: q.option_d,
-    };
-    const correctAnswer = optionMap[q.correct];
-    const options = shuffle([q.option_a, q.option_b, q.option_c, q.option_d]);
-    const correctIndex = options.indexOf(correctAnswer);
-
-    return {
-      id: q.id,
-      question: q.question,
-      options,
-      correctIndex,
-    };
-  });
-}
-
-export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url);
-  const count = Math.min(parseInt(searchParams.get("count") || "10", 10), 20);
-
-  let source: "sheets" | "fallback" = "sheets";
-  let questions: QuestionResponse[];
-
+export async function GET(request: Request) {
   try {
-    const raw = await fetchQuestionsFromSheets();
-    questions = formatQuestions(raw, count);
-  } catch {
-    source = "fallback";
-    const raw = fallbackQuestions as RawQuestion[];
-    questions = formatQuestions(raw, count);
+    const { settings, questions } = await getGameData();
+    const raw = new URL(request.url).searchParams.get("count");
+    const count = raw === null ? settings.questionCounts[1] : Number(raw);
+    if (
+      (raw !== null && !/^\d+$/.test(raw)) ||
+      !settings.questionCounts.includes(count)
+    )
+      throw new AppError(400, "Valitse etusivulta visan pituus.");
+    if (questions.length < count)
+      throw new AppError(
+        503,
+        "Visassa ei ole tarpeeksi aktiivisia kysymyksiä.",
+      );
+    const selected = shuffle(questions)
+      .slice(0, count)
+      .map((q) => {
+        const options = shuffle(q.options);
+        return {
+          id: q.id,
+          question: q.question,
+          options,
+          correctIndex: options.indexOf(q.options[q.correctIndex]),
+        };
+      });
+    return json({
+      questions: selected,
+      settings: { questionTimeSeconds: settings.questionTimeSeconds },
+    });
+  } catch (e) {
+    return apiError(e, "Load game");
   }
-
-  return NextResponse.json({ questions, source });
 }

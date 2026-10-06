@@ -6,24 +6,41 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "vitest run",
+    "test:db": "vitest run tests/storage.test.ts tests/auth.test.ts tests/scores.test.ts",
+    "typecheck": "tsc --noEmit",
+    "db:migrate": "tsx --conditions=react-server scripts/migrate.ts",
+    "db:import": "tsx --conditions=react-server scripts/import-questions.ts",
+    "db:restore": "tsx --conditions=react-server scripts/restore-backup.ts",
+    "admin:password": "tsx scripts/hash-admin-password.ts",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
-    "@upstash/redis": "^1.36.3",
+    "@vercel/functions": "^3.9.11",
     "howler": "^2.2.4",
-    "next": "16.1.6",
+    "next": "^16.3.8",
+    "pg": "^8.23.1",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "server-only": "^0.0.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.63.0",
     "@tailwindcss/postcss": "^4",
     "@types/howler": "^2.2.12",
-    "@types/node": "^20",
+    "@types/node": "^24.19.1",
+    "@types/pg": "^8.23.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.1.6",
+    "eslint-config-next": "^16.3.8",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "tsx": "^4.23.15",
+    "typescript": "^5",
+    "vitest": "^5.0.3"
+  },
+  "engines": {
+    "node": "24.x"
   }
 }

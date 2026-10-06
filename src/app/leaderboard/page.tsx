@@ -1,33 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
 import { useLeaderboard } from "@/hooks/useLeaderboard";
 import Leaderboard from "@/components/Leaderboard";
 
 export default function LeaderboardPage() {
-  const { data, loading, fetchLeaderboard, resetLeaderboard } = useLeaderboard();
-  const [resetting, setResetting] = useState(false);
+  const { data, loading, error, fetchLeaderboard } = useLeaderboard();
 
   useEffect(() => {
     fetchLeaderboard();
     const interval = setInterval(fetchLeaderboard, 30 * 1000);
     return () => clearInterval(interval);
   }, [fetchLeaderboard]);
-
-  const handleReset = async () => {
-    const confirmed = window.confirm("Nollataanko high score -lista?");
-    if (!confirmed) return;
-
-    setResetting(true);
-    try {
-      await resetLeaderboard();
-    } catch (err) {
-      console.error("Failed to reset leaderboard:", err);
-    } finally {
-      setResetting(false);
-    }
-  };
 
   return (
     <main className="flex-1 flex flex-col items-center px-6 py-10 max-w-lg mx-auto w-full">
@@ -41,7 +26,15 @@ export default function LeaderboardPage() {
         </p>
       )}
 
-      {data && !loading && (
+      {error && (
+        <div className="text-center space-y-4">
+          <p role="alert">{error}</p>
+          <button className="arcade-btn p-3" onClick={fetchLeaderboard}>
+            Yritä uudelleen
+          </button>
+        </div>
+      )}
+      {data && !loading && !error && (
         <div className="w-full">
           <Leaderboard allTime={data.allTime} today={data.today} />
         </div>
@@ -54,16 +47,6 @@ export default function LeaderboardPage() {
       >
         Pelaa
       </Link>
-
-      <button
-        type="button"
-        onClick={handleReset}
-        disabled={resetting}
-        className="mt-4 px-6 py-3 rounded-lg border-2 border-border-arcade bg-bg-secondary font-[family-name:var(--font-press-start)] text-[10px] text-text-secondary hover:text-green-glow disabled:opacity-50 transition-colors uppercase tracking-wider"
-        style={{ touchAction: "manipulation" }}
-      >
-        {resetting ? "Nollataan..." : "Nollaa high score"}
-      </button>
     </main>
   );
 }
