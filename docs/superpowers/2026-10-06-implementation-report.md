@@ -21,12 +21,14 @@ Application commits: `466a2ea80b0598cb5c028712b65b1f080b0c3cc7` and `f9d0345`.
 | Independent code review | Three important findings fixed with regression tests: env-file password expansion, fields editable during saves, inherited database credentials |
 | Hosted preview | Login, edit question, edit settings, full game, score save, separate-page leaderboard read, daily/all resets, backup and logout passed |
 | Hosted protection | Secure/HttpOnly/SameSite cookie, admin frame policy, anonymous rejection and foreign-origin rejection passed |
-| Redeployment | Score persisted from first deployment into the reviewed deployment |
+| Redeployment | Score persisted into the reviewed deployment; a second redeployment preserved all question edits, settings, score records and reset cutoffs exactly; 10-question API passed |
 | Backup recovery | Hosted JSON restored into an empty isolated local database; 11 questions, 2 scores, settings, revisions and reset cutoffs matched exactly |
 | Appearance | Hosted desktop and mobile admin screenshots inspected |
 
 Full-flow preview: https://vegevisa-68vo31oqq-ahti.vercel.app
 Deployment: `dpl_2FfU8S9YRYWoZucRiSwqcWPmUsSr`.
+Second deployment used for persistence verification: https://vegevisa-5yu0l0d7x-ahti.vercel.app (`dpl_ATmdmedvhdKwPMvnaitHJVNAgycz`).
+Draft pull request: https://github.com/ahtiai/vegevisa/pull/1 .
 This preview is protected by the existing Vercel project protection. Use the owner's Vercel access. The preview admin password is in an ignored local file, `backups/preview-admin.txt`, with mode 0600.
 
 ## Storage and source status
