@@ -32,7 +32,7 @@ async function main() {
   const file = ".env.admin.local";
   await writeFile(
     file,
-    `ADMIN_PASSWORD_HASH=scrypt$${salt.toString("hex")}$${hash.toString("hex")}\nADMIN_RATE_LIMIT_SECRET=${randomBytes(32).toString("hex")}\n`,
+    `ADMIN_PASSWORD_HASH=scrypt:${salt.toString("hex")}:${hash.toString("hex")}\nADMIN_RATE_LIMIT_SECRET=${randomBytes(32).toString("hex")}\n`,
     { mode: 0o600, flag: "wx" },
   );
   console.log(

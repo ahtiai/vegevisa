@@ -160,6 +160,7 @@ export default function QuestionsEditor({
             <label>
               Kysymys
               <textarea
+                disabled={busy}
                 required
                 maxLength={1000}
                 rows={3}
@@ -171,6 +172,7 @@ export default function QuestionsEditor({
               <label key={i}>
                 Vastaus {"ABCD"[i]}
                 <input
+                  disabled={busy}
                   required
                   maxLength={300}
                   value={o}
@@ -187,6 +189,7 @@ export default function QuestionsEditor({
             <label>
               Oikea vastaus
               <select
+                disabled={busy}
                 value={draft.correctIndex}
                 onChange={(e) => edit({ correctIndex: Number(e.target.value) })}
               >
@@ -199,6 +202,7 @@ export default function QuestionsEditor({
             </label>
             <label className="flex items-center gap-3">
               <input
+                disabled={busy}
                 className="!w-auto"
                 type="checkbox"
                 checked={draft.active}

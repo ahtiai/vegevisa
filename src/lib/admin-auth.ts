@@ -26,7 +26,7 @@ function derive(password: string, salt: Buffer): Promise<Buffer> {
 }
 function configuredHash() {
   const hash = process.env.ADMIN_PASSWORD_HASH;
-  if (!hash || !/^scrypt\$[a-f0-9]{32}\$[a-f0-9]{128}$/.test(hash))
+  if (!hash || !/^scrypt:[a-f0-9]{32}:[a-f0-9]{128}$/.test(hash))
     throw new AppError(503, "Ylläpidon kirjautumista ei ole määritetty.");
   return hash;
 }
@@ -37,7 +37,7 @@ export async function hashPassword(password: string): Promise<string> {
       "Salasanassa pitää olla vähintään 12 merkkiä ja enintään 256 tavua.",
     );
   const salt = randomBytes(16);
-  return `scrypt$${salt.toString("hex")}$${(await derive(password, salt)).toString("hex")}`;
+  return `scrypt:${salt.toString("hex")}:${(await derive(password, salt)).toString("hex")}`;
 }
 export async function verifyPassword(password: string): Promise<boolean> {
   const hash = configuredHash();
@@ -47,7 +47,7 @@ export async function verifyPassword(password: string): Promise<boolean> {
     Buffer.byteLength(password) > 256
   )
     return false;
-  const [, salt, key] = hash.split("$");
+  const [, salt, key] = hash.split(":");
   return timingSafeEqual(
     await derive(password, Buffer.from(salt, "hex")),
     Buffer.from(key, "hex"),

@@ -26,7 +26,7 @@ export default function TimerBar({ timeRemaining, totalTime, questionNumber, tot
 
   return (
     <div className="flex items-center gap-4 w-full">
-      <div className="flex-1 h-3 bg-bg-secondary rounded-full overflow-hidden border-2 border-border-arcade">
+      <div role="progressbar" aria-label="Aikaa jäljellä" aria-valuemin={0} aria-valuemax={totalTime} aria-valuenow={Math.ceil(timeRemaining)} className="flex-1 h-3 bg-bg-secondary rounded-full overflow-hidden border-2 border-border-arcade">
         <div
           className="h-full rounded-full"
           style={{

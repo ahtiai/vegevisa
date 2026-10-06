@@ -45,6 +45,7 @@ export default function QuizSettings({
             <label key={i}>
               Kysymysmäärä {i + 1}
               <input
+                disabled={busy}
                 type="number"
                 required
                 min={1}
@@ -65,6 +66,7 @@ export default function QuizSettings({
           <label>
             Aikaa / kysymys (sekuntia)
             <input
+              disabled={busy}
               type="number"
               required
               min={5}

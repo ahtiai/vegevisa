@@ -1,4 +1,19 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type Page } from "@playwright/test";
+async function holdSave(page: Page, url: string, save: string, label: string) {
+  let release!: () => void;
+  const gate = new Promise<void>((resolve) => { release = resolve; });
+  await page.route(url, async (route) => {
+    const response = await route.fetch();
+    await gate;
+    await route.fulfill({ response });
+  }, { times: 1 });
+  await page.getByRole("button", { name: save, exact: true }).click();
+  try {
+    await expect(page.getByRole(label === "Kysymys" ? "textbox" : "spinbutton", { name: label, exact: true })).toBeDisabled();
+  } finally {
+    release();
+  }
+}
 test("anonymous player cannot access admin or reset scores", async ({
   page,
   request,
@@ -27,14 +42,14 @@ test("owner edits the quiz and players save scores before protected resets", asy
   await page.getByLabel("Kysymys", { exact: true }).fill("Uusi testikysymys");
   for (const [i, answer] of ["Oikea", "Toinen", "Kolmas", "Neljäs"].entries())
     await page.getByLabel(`Vastaus ${"ABCD"[i]}`, { exact: true }).fill(answer);
-  await page.getByRole("button", { name: "Tallenna kysymys" }).click();
+  await holdSave(page, "**/api/admin/questions", "Tallenna kysymys", "Kysymys");
   await expect(
     page.getByText("Kysymys tallennettu.", { exact: true }),
   ).toBeVisible();
   await page.getByLabel("Kysymysmäärä 1").fill("1");
   await page.getByLabel("Kysymysmäärä 2").fill("2");
   await page.getByLabel("Aikaa / kysymys (sekuntia)").fill("30");
-  await page.getByRole("button", { name: "Tallenna asetukset" }).click();
+  await holdSave(page, "**/api/admin/settings", "Tallenna asetukset", "Aikaa / kysymys (sekuntia)");
   await expect(
     page.getByText("Asetukset tallennettu.", { exact: true }),
   ).toBeVisible();
@@ -51,13 +66,26 @@ test("owner edits the quiz and players save scores before protected resets", asy
   await expect(
     page.getByText("Asetukset tallennettu.", { exact: true }),
   ).toBeVisible();
+  await expect(player.getByRole("progressbar", { name: "Aikaa jäljellä" })).toHaveAttribute("aria-valuemax", "30");
   await player.getByRole("button", { name: /Oikea/ }).click();
   await expect(player).toHaveURL(/\/results\?/);
   await player.getByPlaceholder("NIMESI").fill("Browser Player");
+  // The server saves the score, but its response is lost. Retrying must not duplicate it.
+  await player.route("**/api/scores", async (route) => {
+    await route.fetch();
+    await route.abort("failed");
+  }, { times: 1 });
+  await player.getByRole("button", { name: "SAVE", exact: true }).click();
+  await expect(player.getByText(/Paina SAVE yrittääksesi uudelleen/)).toBeVisible();
+  await player.route("**/api/scores/leaderboard", (route) => route.fulfill({ status: 503, json: { error: "Test outage" } }), { times: 1 });
   await player.getByRole("button", { name: "SAVE", exact: true }).click();
   await expect(
     player.getByText("Tulos tallennettu!", { exact: true }),
   ).toBeVisible();
+  await expect(player.getByText(/Tuloslistan lataaminen epäonnistui/)).toBeVisible();
+  await player.getByRole("button", { name: "Päivitä tuloslista" }).click();
+  const scores = await (await player.request.get("/api/scores/leaderboard")).json();
+  expect(scores.allTime.filter((score: { player_name: string }) => score.player_name === "Browser Player")).toHaveLength(1);
   const other = await playerContext.newPage();
   await other.goto("/leaderboard");
   await expect(

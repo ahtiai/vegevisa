@@ -60,6 +60,7 @@ test("invalid answers and insufficient active questions cannot be saved", async 
   ).rejects.toMatchObject({ status: 400 });
 });
 test("CSV import keeps inactive rows and rejects duplicate IDs before writes", async () => {
+  expect(() => parseQuestionCSV("id,question,option_a,option_b,option_c,option_d,correct\nq1,Question,a,b,c,d,a\n")).toThrow(/sarake active puuttuu/);
   const csv =
     'id,question,option_a,option_b,option_c,option_d,correct,active\nq1,"Text, quoted",a,b,c,d,b,FALSE\n';
   const rows = parseQuestionCSV(csv);

@@ -42,6 +42,7 @@ export function parseQuestionCSV(csv: string): Question[] {
     "option_c",
     "option_d",
     "correct",
+    "active",
   ])
     if (!headers.includes(h))
       throw new AppError(400, `CSV: sarake ${h} puuttuu.`);

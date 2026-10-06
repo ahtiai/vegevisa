@@ -17,7 +17,7 @@ export default function HighScoreAdmin({
       !confirm(
         scope === "today"
           ? "Tyhjennetäänkö tämän päivän lista? All time -lista säilyy."
-          : "Tyhjennetäänkö molemmat tuloslistat? Tallennetut tulokset säilyvät varmuuskopiossa.",
+          : "Tyhjennetäänkö molemmat tuloslistat? Tulokset säilyvät tallennettuina.",
       )
     )
       return;

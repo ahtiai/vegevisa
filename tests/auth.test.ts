@@ -13,6 +13,7 @@ import {
   requireSameOrigin,
 } from "@/lib/admin-auth";
 import { getDb } from "@/lib/db";
+import { spawnSync } from "node:child_process";
 beforeAll(async () => {
   await setupDatabase();
   process.env.ADMIN_PASSWORD_HASH = await hashPassword(
@@ -23,6 +24,17 @@ beforeAll(async () => {
 });
 beforeEach(resetDatabase);
 afterAll(closeDatabase);
+test("generated password hashes survive Next environment file loading", async () => {
+  const hash = await hashPassword("environment test password");
+  const result = spawnSync(process.execPath, ["-e", `
+    const expected = require('node:fs').readFileSync(0, 'utf8');
+    const { processEnv } = require('@next/env');
+    processEnv([{ path: '.env.local', contents: 'TEST_HASH=' + expected, env: {} }], undefined, true);
+    process.stdout.write(String(process.env.TEST_HASH === expected));
+  `], { input: hash, encoding: "utf8" });
+  expect(result.status).toBe(0);
+  expect(result.stdout).toBe("true");
+});
 test("password validation and hash configuration fail closed", async () => {
   expect(await verifyPassword("wrong")).toBe(false);
   expect(await verifyPassword("a strong test password")).toBe(true);

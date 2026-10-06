@@ -20,7 +20,7 @@ export function useLeaderboard() {
   }, []);
   const submitScore = useCallback(
     async (params: ScoreInput) => {
-      const result = await requestJSON<{ success: true; rank: number }>(
+      const result = await requestJSON<{ success: true; rank: number | null }>(
         "/api/scores",
         { method: "POST", body: JSON.stringify(params) },
       );

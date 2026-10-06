@@ -11,14 +11,15 @@ export function loadTarget() {
     throw Error(
       "Specify --env-file and --target (test, preview or production).",
     );
-  Object.assign(process.env, parseEnv(readFileSync(file, "utf8")));
+  const values = parseEnv(readFileSync(file, "utf8"));
   if (
     !["test", "preview", "production"].includes(target) ||
-    process.env.DATABASE_ENV !== target ||
-    !process.env.DATABASE_URL
+    values.DATABASE_ENV !== target ||
+    !values.DATABASE_URL?.trim()
   )
     throw Error(
       "DATABASE_ENV must match the explicit target and DATABASE_URL must be set.",
     );
+  Object.assign(process.env, values);
   return { target, apply: process.argv.includes("--apply") };
 }
