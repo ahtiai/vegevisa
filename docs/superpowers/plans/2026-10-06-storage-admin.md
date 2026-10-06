@@ -10,6 +10,10 @@
 
 **Spec:** [Storage and admin design](../specs/2026-10-06-storage-admin-design.md). Read it before execution. Provider choice, Helsinki day boundaries, single-owner login, and the precise setting ranges are proposed defaults for review.
 
+## Implementation status — 2026-10-06
+
+Application implementation is complete and verified locally and in a hosted Neon preview. Production release remains pending the real question-set choice and production preparation. See [implementation report](../2026-10-06-implementation-report.md) for exact checks, review fixes, decisions and remaining release steps. The detailed checkboxes below preserve the original planned sequence rather than asserting every production step has run.
+
 ## Global constraints
 
 - Keep the existing game design and Finnish copy; use Finnish admin copy.
