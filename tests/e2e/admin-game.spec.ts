@@ -35,6 +35,7 @@ test("owner edits the quiz and players save scores before protected resets", asy
   await page.goto("/admin/login");
   await page.getByLabel("Salasana").fill("test-only-admin-password");
   await page.getByRole("button", { name: "Kirjaudu", exact: true }).click();
+  await expect(page).toHaveURL(/\/admin$/);
   await expect(
     page.getByRole("heading", { name: "Kysymykset", exact: true }),
   ).toBeVisible();
