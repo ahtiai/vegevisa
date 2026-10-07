@@ -1,10 +1,8 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { requestJSON } from "@/lib/client-api";
 export default function LoginPage() {
-  const router = useRouter();
   const [password, setPassword] = useState(""),
     [error, setError] = useState(""),
     [busy, setBusy] = useState(false);
@@ -26,8 +24,7 @@ export default function LoginPage() {
               method: "POST",
               body: JSON.stringify({ password }),
             });
-            router.replace("/admin");
-            router.refresh();
+            window.location.replace("/admin");
           } catch (e) {
             setError(
               e instanceof Error ? e.message : "Kirjautuminen epäonnistui.",
