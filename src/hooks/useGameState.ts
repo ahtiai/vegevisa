@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
+import { requestJSON } from "@/lib/client-api";
 import { calculateScore } from "@/lib/scoring";
 
 export interface GameQuestion {
@@ -10,10 +11,20 @@ export interface GameQuestion {
   correctIndex: number;
 }
 
-export type GamePhase = "start" | "countdown" | "playing" | "feedback" | "results";
+export type GamePhase =
+  | "start"
+  | "loading"
+  | "error"
+  | "countdown"
+  | "playing"
+  | "feedback"
+  | "results";
 
 export interface GameState {
   phase: GamePhase;
+  questionTimeSeconds: number;
+  submissionId: string;
+  error: string;
   questions: GameQuestion[];
   currentQuestionIndex: number;
   score: number;
@@ -28,6 +39,9 @@ export interface GameState {
 
 const initialState: GameState = {
   phase: "start",
+  questionTimeSeconds: 30,
+  submissionId: "",
+  error: "",
   questions: [],
   currentQuestionIndex: 0,
   score: 0,
@@ -44,20 +58,39 @@ export function useGameState() {
   const [state, setState] = useState<GameState>(initialState);
   const feedbackTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const startGame = useCallback(async (questionCount: 5 | 10) => {
-    setState((s) => ({ ...s, phase: "countdown", totalQuestions: questionCount }));
-
+  const requestVersion = useRef(0);
+  useEffect(
+    () => () => {
+      requestVersion.current++;
+    },
+    [],
+  );
+  const startGame = useCallback(async (questionCount?: number) => {
+    const version = ++requestVersion.current;
+    setState({ ...initialState, phase: "loading" });
     try {
-      const res = await fetch(`/api/questions?count=${questionCount}`);
-      const data = await res.json();
-
-      setState((s) => ({
-        ...s,
+      const data = await requestJSON<{
+        questions: GameQuestion[];
+        settings: { questionTimeSeconds: number };
+      }>(
+        `/api/questions${questionCount === undefined ? "" : `?count=${questionCount}`}`,
+      );
+      if (version !== requestVersion.current) return;
+      setState({
+        ...initialState,
+        phase: "countdown",
         questions: data.questions,
-      }));
-    } catch {
-      // Use an empty array - game will show error
-      setState((s) => ({ ...s, questions: [] }));
+        totalQuestions: data.questions.length,
+        questionTimeSeconds: data.settings.questionTimeSeconds,
+        submissionId: crypto.randomUUID(),
+      });
+    } catch (e) {
+      if (version === requestVersion.current)
+        setState((s) => ({
+          ...s,
+          phase: "error",
+          error: e instanceof Error ? e.message : "Kysymyksiä ei voitu ladata.",
+        }));
     }
   }, []);
 
@@ -78,11 +111,13 @@ export function useGameState() {
   const answerQuestion = useCallback(
     (answerIndex: number, timeRemaining: number) => {
       setState((s) => {
-        if (s.selectedAnswer !== null) return s; // prevent double-tap
+        if (s.phase !== "playing" || s.selectedAnswer !== null) return s; // prevent double-tap
 
         const question = s.questions[s.currentQuestionIndex];
         const correct = answerIndex === question.correctIndex;
-        const points = correct ? calculateScore(timeRemaining) : 0;
+        const points = correct
+          ? calculateScore(timeRemaining, s.questionTimeSeconds)
+          : 0;
 
         return {
           ...s,
@@ -95,12 +130,12 @@ export function useGameState() {
         };
       });
     },
-    []
+    [],
   );
 
   const timeUp = useCallback(() => {
     setState((s) => {
-      if (s.selectedAnswer !== null) return s;
+      if (s.phase !== "playing" || s.selectedAnswer !== null) return s;
       return {
         ...s,
         phase: "feedback",

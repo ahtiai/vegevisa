@@ -1,9 +1,15 @@
 const BASE_POINTS = 1000;
 const MAX_BONUS = 1000;
-const TOTAL_TIME = 30; // seconds
 
-export function calculateScore(timeRemaining: number): number {
-  const bonus = Math.round(MAX_BONUS * (timeRemaining / TOTAL_TIME));
+export function calculateScore(
+  timeRemaining: number,
+  totalTime: number,
+): number {
+  const fraction =
+    Number.isFinite(timeRemaining) && totalTime > 0
+      ? Math.max(0, Math.min(1, timeRemaining / totalTime))
+      : 0;
+  const bonus = Math.round(MAX_BONUS * fraction);
   return BASE_POINTS + bonus;
 }
 
@@ -11,7 +17,10 @@ export function getMaxScore(totalQuestions: number): number {
   return totalQuestions * (BASE_POINTS + MAX_BONUS);
 }
 
-export function getScorePercentage(score: number, totalQuestions: number): number {
+export function getScorePercentage(
+  score: number,
+  totalQuestions: number,
+): number {
   return (score / getMaxScore(totalQuestions)) * 100;
 }
 

@@ -19,10 +19,18 @@ function ResultsContent() {
   const total = parseInt(searchParams.get("total") || "10");
   const time = parseInt(searchParams.get("time") || "0");
 
+  const submissionId = searchParams.get("id") || "";
+  const validId =
+    /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(
+      submissionId,
+    );
+  const [saveError, setSaveError] = useState("");
+
   const percentage = getScorePercentage(score, total);
   const rank = getRankTitle(percentage);
 
-  const { data, loading, fetchLeaderboard, submitScore } = useLeaderboard();
+  const { data, loading, error, fetchLeaderboard, submitScore } =
+    useLeaderboard();
   const { play, stop, initSounds } = useSound();
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -41,9 +49,12 @@ function ResultsContent() {
   }, [stop]);
 
   const handleSubmitScore = async (name: string) => {
+    if (submitting || submitted || !validId) return;
+    setSaveError("");
     setSubmitting(true);
     try {
       await submitScore({
+        submissionId,
         playerName: name,
         score,
         correctAnswers: correct,
@@ -52,7 +63,9 @@ function ResultsContent() {
       });
       setSubmitted(true);
     } catch (err) {
-      console.error("Failed to submit score:", err);
+      setSaveError(
+        err instanceof Error ? err.message : "Tallentaminen epäonnistui.",
+      );
     } finally {
       setSubmitting(false);
     }
@@ -66,7 +79,11 @@ function ResultsContent() {
       </h1>
 
       {/* Score */}
-      <ScoreDisplay score={score} onTallyStart={handleTallyStart} onTallyEnd={handleTallyEnd} />
+      <ScoreDisplay
+        score={score}
+        onTallyStart={handleTallyStart}
+        onTallyEnd={handleTallyEnd}
+      />
 
       {/* Stats */}
       <p className="font-[family-name:var(--font-press-start)] text-xs text-white/70 mt-5">
@@ -83,7 +100,22 @@ function ResultsContent() {
 
       {/* Name input */}
       <div className="w-full mt-10">
-        <NameInput onSubmit={handleSubmitScore} loading={submitting} submitted={submitted} />
+        {validId ? (
+          <NameInput
+            onSubmit={handleSubmitScore}
+            loading={submitting}
+            submitted={submitted}
+          />
+        ) : (
+          <p role="alert">
+            Pelin tunnus puuttuu. Aloita uusi peli tallentaaksesi tuloksen.
+          </p>
+        )}
+        {saveError && (
+          <p role="alert" className="text-red-300 mt-4">
+            {saveError} Paina SAVE yrittääksesi uudelleen.
+          </p>
+        )}
       </div>
 
       {/* Share */}
@@ -92,7 +124,15 @@ function ResultsContent() {
       </div>
 
       {/* Leaderboard peek */}
-      {data && !loading && (
+      {error && (
+        <div className="mt-6 text-center space-y-3">
+          <p role="alert">Tuloslistan lataaminen epäonnistui. {error}</p>
+          <button className="arcade-btn p-3" onClick={fetchLeaderboard}>
+            Päivitä tuloslista
+          </button>
+        </div>
+      )}
+      {data && !loading && !error && (
         <div className="w-full mt-10">
           <Leaderboard allTime={data.allTime} today={data.today} compact />
         </div>
@@ -117,8 +157,19 @@ function ResultsContent() {
 
       {/* Pro Vege logo */}
       <footer className="mt-10 flex justify-center">
-        <a href="https://provege.fi" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
-          <Image src="/images/provege-pixel.svg" alt="Pro Vege" width={160} height={32} className="opacity-70 hover:opacity-100 transition-opacity" />
+        <a
+          href="https://provege.fi"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:opacity-80 transition-opacity"
+        >
+          <Image
+            src="/images/provege-pixel.svg"
+            alt="Pro Vege"
+            width={160}
+            height={32}
+            className="opacity-70 hover:opacity-100 transition-opacity"
+          />
         </a>
       </footer>
     </main>

@@ -8,8 +8,15 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Content-Security-Policy",
-            value: "frame-ancestors 'self' https://provege.fi https://*.provege.fi",
+            value:
+              "frame-ancestors 'self' https://provege.fi https://*.provege.fi",
           },
+        ],
+      },
+      {
+        source: "/admin/:path*",
+        headers: [
+          { key: "Content-Security-Policy", value: "frame-ancestors 'none'" },
         ],
       },
     ];

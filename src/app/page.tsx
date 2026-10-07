@@ -1,5 +1,7 @@
 "use client";
 
+import { useState, useEffect, useCallback } from "react";
+import { requestJSON } from "@/lib/client-api";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -7,9 +9,21 @@ import Image from "next/image";
 export default function StartScreen() {
   const router = useRouter();
 
-  const handleStart = (count: 5 | 10) => {
-    router.push(`/play?count=${count}`);
-  };
+  const [counts, setCounts] = useState<number[]>([]);
+  const [error, setError] = useState("");
+  const load = useCallback(
+    () =>
+      requestJSON<{ questionCounts: number[] }>("/api/settings")
+        .then((data) => {
+          setCounts(data.questionCounts);
+          setError("");
+        })
+        .catch((e) => setError((e as Error).message)),
+    [],
+  );
+  useEffect(() => {
+    void load();
+  }, [load]);
 
   return (
     <main className="flex-1 flex flex-col items-center justify-center px-6 py-10">
@@ -25,20 +39,29 @@ export default function StartScreen() {
 
       {/* Start buttons */}
       <div className="w-full max-w-sm space-y-5">
-        <button
-          onClick={() => handleStart(5)}
-          className="arcade-btn w-full h-20 rounded-lg text-green-glow font-[family-name:var(--font-press-start)] text-sm tracking-wider"
-          style={{ touchAction: "manipulation" }}
-        >
-          5 KYSYMYSTÄ
-        </button>
-        <button
-          onClick={() => handleStart(10)}
-          className="arcade-btn w-full h-20 rounded-lg text-accent font-[family-name:var(--font-press-start)] text-sm tracking-wider"
-          style={{ touchAction: "manipulation" }}
-        >
-          10 KYSYMYSTÄ
-        </button>
+        {counts.map((count, i) => (
+          <button
+            key={count}
+            onClick={() => router.push(`/play?count=${count}`)}
+            className={`arcade-btn w-full h-20 rounded-lg ${i === 0 ? "text-green-glow" : "text-accent"} font-[family-name:var(--font-press-start)] text-sm tracking-wider`}
+            style={{ touchAction: "manipulation" }}
+          >
+            {count} KYSYMYSTÄ
+          </button>
+        ))}
+        {!counts.length && !error && (
+          <p role="status" className="text-center">
+            Ladataan visaa…
+          </p>
+        )}
+        {error && (
+          <div className="text-center space-y-4">
+            <p role="alert">{error}</p>
+            <button className="arcade-btn p-4" onClick={load}>
+              Yritä uudelleen
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Leaderboard link */}
