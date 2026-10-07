@@ -1,4 +1,6 @@
-# VegeVisa storage and admin: implementation report
+# VegeVisa storage and admin: implementation and release report
+
+Production released on 2026-10-07 at https://vegevisa.vercel.app. Admin: https://vegevisa.vercel.app/admin.
 
 ## Delivered
 
@@ -28,18 +30,30 @@ Application commits: `466a2ea80b0598cb5c028712b65b1f080b0c3cc7` and `f9d0345`.
 Full-flow preview: https://vegevisa-68vo31oqq-ahti.vercel.app
 Deployment: `dpl_2FfU8S9YRYWoZucRiSwqcWPmUsSr`.
 Second deployment used for persistence verification: https://vegevisa-5yu0l0d7x-ahti.vercel.app (`dpl_ATmdmedvhdKwPMvnaitHJVNAgycz`).
-Draft pull request: https://github.com/ahtiai/vegevisa/pull/1 .
+Pull request: https://github.com/ahtiai/vegevisa/pull/1 .
 This preview is protected by the existing Vercel project protection. Use the owner's Vercel access. The preview admin password is in an ignored local file, `backups/preview-admin.txt`, with mode 0600.
+
+## Production verification — 2026-10-07
+
+The owner selected option 2: activate all 25 real questions and keep 5/10-question games. The 30-second timer is unchanged. Both lengths were played successfully with the real content in the hosted preview.
+
+A production build was staged and checked before promotion. Deployment `dpl_7Crvj7FfKzv4fGesTbAJ8NvbmRMG` at https://vegevisa-6dtn0qbcn-ahti.vercel.app used production credentials and was promoted to the public domain. Staged checks confirmed both question lengths, empty initial score lists, owner login, secure cookies, exact imported content, cross-site rejection, anonymous denial and logout.
+
+On the actual public domain, a browser completed a five-question game, saved its score, and a separate browser read that score. Owner login showed 25 active questions and the correct settings; backup and logout worked. Only the uniquely identified release-test score was removed afterwards; no production leaderboard was reset. A fresh production backup restored into a new local database with all 25 questions, score records, settings, revisions and reset state matching exactly.
+
+The first production error-log scan returned three Postgres SSL-mode deprecation warnings, all attached to successful HTTP 200 requests. It found no application failure in that bounded scan. This does not establish future uptime or load capacity.
 
 ## Storage and source status
 
-Neon resource `vegevisa-preview`, store `store_5i1Q253SkfOCDJvB`, region `fra1`, selected plan `free_v3`. Linked to Preview and Development only. New database/auth variables are absent from Production. Preview tests and resets therefore cannot operate on the current production Redis data.
+The preview resource is `vegevisa-preview`, store `store_5i1Q253SkfOCDJvB`, linked only to Preview/Development. The production resource is `vegevisa-production`, store `store_rqmziNYDtzwgwo7m`, linked only to Production. Both use `fra1` and the selected `free_v3` plan. The production resource was freshly inspected as available on the Free plan. Distinct database hosts, URLs and Neon project IDs were checked before migration.
 
-The real CSV was exported and validated: **25 questions, 5 active**. The raw export is retained under ignored `backups/`. It has not been imported. The preview contains **11 clearly labelled synthetic questions**, default lengths 5/10 and a 30-second timer. Test score records remain stored but are hidden by the tested reset cutoffs.
+All 25 source questions are active in both databases, with 5/10-question games and 30 seconds per question. Question text, answers, correct-answer mappings and IDs were preserved. The original CSV with 5 active questions and the approved all-active CSV remain under ignored `backups/`, together with before/after backups. Synthetic preview questions were replaced only after confirming that the test dataset had not changed.
 
-The source choice is still open: preserve the 5 active questions and start with 3/5-question games, or approve activation of all 25 and retain 5/10-question games. Do not activate inactive content automatically. For a 3/5 launch, set the reviewed initial settings before the one-time source import; do not import against the default 10-question requirement.
+Production has its own generated admin password and rate-limit secret. The password is stored locally in ignored `backups/production-admin.txt` with mode 0600. Production origin is exactly `https://vegevisa.vercel.app`. Preview login credentials cannot authenticate against production.
 
-Production has **not** been deployed or migrated. The existing Upstash endpoint failed DNS resolution during investigation, and old scores have not been recovered. This change does not recover them.
+The current [Neon Free plan announcement](https://neon.com/blog/neon-free-plan-1-gb-per-project) documents 1 GB storage per project, 100 compute-unit hours per project per month and a six-hour restore window. No paid upgrade was selected. These are provider-documented limits, not a provider-recovery rehearsal; the application's manual backup/restore was tested. The older plans page still showed 0.5 GB, so the newer dated announcement is the cited limit.
+
+The old Upstash resource remains unavailable and old scores have not been recovered. This release starts with an empty score history and preserves future scores in Postgres.
 
 ## Decisions made during implementation
 
@@ -50,14 +64,10 @@ Production has **not** been deployed or migrated. The existing Upstash endpoint 
 
 Review minors were addressed: the CSV explicitly requires an `active` column, reset copy says records remain stored, and the browser test asserts the running timer's original maximum. No review findings were deferred.
 
-## Remaining release work
+## Operations and recovery
 
-1. Resolve the real question set and starting quiz lengths.
-2. Prepare a separate production database, confirm production plan limits and actual provider recovery settings, configure a fresh production admin password and exact public origin, then migrate/import explicitly.
-3. Verify the imported counts and playable content; take a backup. Obtain the final production publishing decision after the concrete target is ready.
-4. Build/deploy specifically for Production. Do not promote a build carrying preview database credentials.
-5. Verify a controlled production game/save/read, owner login, and anonymous write rejection. Do not reset production lists for testing.
+Production content migration and public browser checks are complete. Source exports, production backups and credentials remain ignored and were not committed. The public quiz has no runtime Upstash or Google Sheets dependency.
 
-Manual export/restore is verified. Provider-managed recovery settings and production costs are not claimed as verified. Score calculation remains client-side, as agreed; this is not an anti-cheat redesign. Hosted tests used separate requests and browser contexts, but did not prove a particular number of simultaneous Vercel function instances or production load capacity.
+Score calculation remains client-side, as agreed; this is not an anti-cheat redesign. Hosted checks used separate requests and browsers but do not prove a specific number of simultaneous Vercel function instances. No recurring monitoring or backup schedule was created.
 
-Keep the new database for rollback. The old Upstash build is not a working rollback target. See README for password rotation, backup/restore and disabling admin access while preserving data.
+Keep the new database for rollback. The old Upstash build is not a working rollback target. See README for password rotation, manual backup/restore and disabling admin access while preserving data.
