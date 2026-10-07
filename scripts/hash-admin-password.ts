@@ -17,8 +17,8 @@ async function main() {
   );
   rl.close();
   process.stdout.write("\n");
-  if (password.length < 12 || Buffer.byteLength(password) > 256)
-    throw Error("Use at least 12 characters, at most 256 UTF-8 bytes.");
+  if (!password || Buffer.byteLength(password) > 256)
+    throw Error("Use a non-empty password, at most 256 UTF-8 bytes.");
   const salt = randomBytes(16);
   const hash = await new Promise<Buffer>((resolve, reject) =>
     scrypt(

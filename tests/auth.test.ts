@@ -24,6 +24,21 @@ beforeAll(async () => {
 });
 beforeEach(resetDatabase);
 afterAll(closeDatabase);
+test("short passwords can create a valid admin session", async () => {
+  const saved = process.env.ADMIN_PASSWORD_HASH;
+  try {
+    process.env.ADMIN_PASSWORD_HASH = await hashPassword("x");
+    const session = await login("x", "127.0.0.1");
+    expect(await validateSession(session.token)).toBe(true);
+    expect(await verifyPassword("wrong")).toBe(false);
+  } finally {
+    process.env.ADMIN_PASSWORD_HASH = saved;
+  }
+});
+test("password setup rejects empty and oversized inputs", async () => {
+  await expect(hashPassword("")).rejects.toMatchObject({ status: 400 });
+  await expect(hashPassword("ä".repeat(129))).rejects.toMatchObject({ status: 400 });
+});
 test("generated password hashes survive Next environment file loading", async () => {
   const hash = await hashPassword("environment test password");
   const result = spawnSync(process.execPath, ["-e", `

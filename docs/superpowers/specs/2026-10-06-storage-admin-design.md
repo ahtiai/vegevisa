@@ -38,7 +38,7 @@ The public leaderboard keeps its existing tabs and ranking style. Remove its res
 
 ## Login and access
 
-Single owner login with no signup, email delivery, roles, or external identity service. Configure `ADMIN_PASSWORD_HASH` using a local password-hashing command that prompts without echoing the password. Use Node's asynchronous scrypt with a 16-byte random salt, 64-byte derived key, N=131072, r=8, p=1, and maxmem=256 MiB; compare derived keys in constant time. Require at least 12 characters when setting the password and reject inputs longer than 256 UTF-8 bytes before hashing. Never put a password in source, a command argument, logs, or the plan.
+Single owner login with no signup, email delivery, roles, or external identity service. Configure `ADMIN_PASSWORD_HASH` using a local password-hashing command that prompts without echoing the password. Use Node's asynchronous scrypt with a 16-byte random salt, 64-byte derived key, N=131072, r=8, p=1, and maxmem=256 MiB; compare derived keys in constant time. Require a non-empty password when setting it and reject inputs longer than 256 UTF-8 bytes before hashing. Never put a password in source, a command argument, logs, or the plan.
 
 Create a random 32-byte session token on successful login. Store only its SHA-256 digest in Postgres and place the raw token in a host-only, HttpOnly, SameSite=Lax cookie, Secure on HTTPS. Session lifetime is eight hours with no automatic extension. Logout deletes the session record and cookie. Bind sessions to a fingerprint of the configured password hash, so password rotation invalidates old sessions. Reject access if auth configuration or the database is unavailable.
 

@@ -31,10 +31,10 @@ function configuredHash() {
   return hash;
 }
 export async function hashPassword(password: string): Promise<string> {
-  if (password.length < 12 || Buffer.byteLength(password) > 256)
+  if (!password || Buffer.byteLength(password) > 256)
     throw new AppError(
       400,
-      "Salasanassa pitää olla vähintään 12 merkkiä ja enintään 256 tavua.",
+      "Salasana ei saa olla tyhjä tai yli 256 tavua.",
     );
   const salt = randomBytes(16);
   return `scrypt:${salt.toString("hex")}:${(await derive(password, salt)).toString("hex")}`;
